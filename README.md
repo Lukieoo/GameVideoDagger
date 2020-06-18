@@ -1,4 +1,5 @@
 # GameVideoDagger
-Dagger , RxJava , Rettrofit ,Unit Test ,Mvvm example 
+Dagger2 , RxJava , Retrofit2 ,Unit Test ,Mvvm example 
+
 
 <p>https://rawg.io/</p>
