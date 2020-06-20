@@ -36,6 +36,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //Material design
+    implementation 'com.google.android.material:material:1.0.0-alpha1'
+
+    //Style
+    implementation 'com.chootdev:blurimg:1.0.1'
+
     //implement Dagger the latest version (current)
 
     // Dagger

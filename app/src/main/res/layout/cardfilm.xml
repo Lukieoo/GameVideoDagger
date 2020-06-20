@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="50dp"
+    android:layout_margin="3dp"
+    android:padding="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@drawable/tmp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="80dp"
+            app:cardBackgroundColor="#aa000000"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="@color/textcolorWhite"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/title"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/productsansmedium"
+                    android:layout_centerHorizontal="true"
+                    android:text="Horizon: Zero Dawn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/textcolorWhite"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="12sp"
+                    android:id="@+id/type"
+                    android:layout_below="@id/title"
+                    android:fontFamily="@font/productsanslight"
+                    android:layout_centerHorizontal="true"
+                    android:text="Action: Character"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
