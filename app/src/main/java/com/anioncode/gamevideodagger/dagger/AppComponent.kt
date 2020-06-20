@@ -1,5 +1,6 @@
 package com.anioncode.gamevideodagger.dagger
 
+import com.anioncode.gamevideodagger.viewmodels.ViewModelFactoryModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector

@@ -1,4 +1,4 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.viewmodels
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -1,4 +1,4 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.network
 
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,8 @@ class AuthModule {
         @JvmStatic
 
         fun provideSessionApi(retrofit: Retrofit): AuthApi {
-            return retrofit.create<AuthApi>(AuthApi::class.java)
+            return retrofit.create<AuthApi>(
+                AuthApi::class.java)
         }
     }
 }
