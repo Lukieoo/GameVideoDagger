@@ -1,5 +1,7 @@
 package com.anioncode.gamevideodagger.dagger
 
+import com.anioncode.gamevideodagger.main.home.MainFragmentBuildersModule
+import com.anioncode.gamevideodagger.network.AuthModule
 import com.anioncode.gamevideodagger.viewmodels.ViewModelFactoryModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -13,7 +15,10 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         VideoModule::class,
-        ViewModelFactoryModule::class
+        ViewModelFactoryModule::class,
+        MainFragmentBuildersModule::class,
+        DataViewModelsModule::class,
+        AuthModule::class
     ]
 )
 

@@ -1,6 +1,7 @@
 package com.anioncode.gamevideodagger.dagger
 
 import com.anioncode.gamevideodagger.main.MainActivity
+import com.anioncode.gamevideodagger.main.home.MainFragmentBuildersModule
 import com.anioncode.gamevideodagger.network.AuthModule
 import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.Module
@@ -17,12 +18,7 @@ import javax.inject.Singleton
 abstract class VideoModule {
 
     //to powinienem dać do innej klasy...
-    @ContributesAndroidInjector(
-        modules = [
-            DataViewModelsModule::class,
-            AuthModule::class
-        ]
-    )
+    @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity //Must call how our main Activity
 
     // ...do tego momentu  ponieważ odnosi się to do aktywności , MainActivityBuildersModule coś takiego
@@ -32,7 +28,6 @@ abstract class VideoModule {
         open fun provideAdapter(): TopAdapter {
             return TopAdapter();
         }
-
 
         @Singleton
         @Provides
