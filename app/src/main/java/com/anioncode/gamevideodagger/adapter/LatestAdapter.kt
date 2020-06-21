@@ -10,7 +10,7 @@ import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_popular.view.*
 
-class TopAdapter: RecyclerView.Adapter<ViewHolder>() {
+class LatestAdapter: RecyclerView.Adapter<ViewHolder1>() {
 
     lateinit var items: ArrayList<Result>
     // Gets the number of games in the list
@@ -30,31 +30,29 @@ class TopAdapter: RecyclerView.Adapter<ViewHolder>() {
     }
 
     // Inflates the item views
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder1 {
 
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_popular, parent, false))
+        return ViewHolder1(LayoutInflater.from(parent.context).inflate(R.layout.item_latest, parent, false))
 
     }
 
     // Binds each animal in the ArrayList to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder1, position: Int) {
         var model=items.get(position)
-        holder.title.text=model.name
-        holder.type.text="${model.rating}/${model.rating_top}"
-
         Picasso.get()
+
             .load(model.background_image)
-            .resize(690,532)
+//            .load("https://media.rawg.io/media/games/2ad/2ad87a4a69b1104f02435c14c5196095.jpg")
+
+            .resize(400,300)
             .networkPolicy(NetworkPolicy.OFFLINE)
             .into( holder.photoGame);
 
     }
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder1 (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each video to
-    val title = view.title
-    val type = view.type
     val photoGame = view.photoGame
 
 }

@@ -17,6 +17,7 @@ import javax.inject.Singleton
         VideoModule::class,
         ViewModelFactoryModule::class,
         MainFragmentBuildersModule::class,
+
         DataViewModelsModule::class,
         AuthModule::class
     ]

@@ -14,7 +14,15 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/textcolorGrey"
+        app:layout_constraintBottom_toBottomOf="@+id/myframe" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:labelVisibilityMode="labeled"
+        android:theme="@style/Widget.BottomNavigationView"
         app:itemIconTint="@drawable/bnv_tab_item_foreground"
         app:itemTextColor="@drawable/bnv_tab_item_foreground"
         android:id="@+id/bottom_navigation"
