@@ -1,8 +1,9 @@
 package com.anioncode.gamevideodagger.dagger
 
+import android.app.Application
+import android.widget.Toast
 import com.anioncode.gamevideodagger.main.MainActivity
-import com.anioncode.gamevideodagger.main.home.MainFragmentBuildersModule
-import com.anioncode.gamevideodagger.network.AuthModule
+import com.anioncode.gamevideodagger.model.ranked.Result
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.Module
@@ -27,8 +28,15 @@ abstract class VideoModule {
         @Singleton
         @Provides
         @JvmStatic
-        open fun provideAdapter(): TopAdapter {
-            return TopAdapter();
+        open fun provideAdapter(application: Application): TopAdapter {
+            return TopAdapter (itemClick = object : TopAdapter.OnClickAdapterListner{
+
+                override fun onClick(game: Result) {
+                    Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
+
+                }
+
+            });
         }
         @Singleton
         @Provides

@@ -1,8 +1,10 @@
 package com.anioncode.gamevideodagger.dagger
 
+import android.app.Application
 import com.anioncode.gamevideodagger.main.home.MainFragmentBuildersModule
 import com.anioncode.gamevideodagger.network.AuthModule
 import com.anioncode.gamevideodagger.viewmodels.ViewModelFactoryModule
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -25,3 +27,12 @@ import javax.inject.Singleton
 
 interface AppComponent :
     AndroidInjector<DaggerApplication> //here we can overide method in our Dagger generated class and we can pass a data .
+{
+    fun inject(application :Application)
+    @Component.Builder
+    interface Builder{
+        @BindsInstance
+        fun application(application: Application):Builder
+        fun build(): AppComponent
+    }
+}
