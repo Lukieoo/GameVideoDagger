@@ -11,4 +11,8 @@
         parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/productsansmedium</item>
     </style>
+    <style name="Theme.MyFancyTheme" parent="android:Theme.Holo">
+        <item name="android:homeAsUpIndicator">@color/textcolorWhite</item>
+        <item name="colorControlNormal">@color/textcolorWhite</item>
+    </style>
 </resources>

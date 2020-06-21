@@ -1,8 +1,11 @@
 package com.anioncode.gamevideodagger.dagger
 
 import android.app.Application
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.widget.Toast
 import com.anioncode.gamevideodagger.main.MainActivity
+import com.anioncode.gamevideodagger.main.PreviewGameActivity
 import com.anioncode.gamevideodagger.model.ranked.Result
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
@@ -33,7 +36,13 @@ abstract class VideoModule {
 
                 override fun onClick(game: Result) {
                     Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
+                    var intent= Intent(application.applicationContext,PreviewGameActivity::class.java).apply {
+                        putExtra("GameListBackround",game.background_image)
+                        putExtra("GameListColor",game.dominant_color)
 
+                    }
+                    intent.flags=FLAG_ACTIVITY_NEW_TASK
+                    application.applicationContext.startActivity(intent)
                 }
 
             });
