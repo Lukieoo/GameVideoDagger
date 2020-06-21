@@ -5,6 +5,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
+// class create base dagger application
 class DaggerApplication : Application(),HasAndroidInjector {
 
     @Inject

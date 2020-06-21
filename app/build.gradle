@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.anioncode.gamevideodagger"
-        minSdkVersion 18
+        minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,8 @@ dependencies {
 
     //Style
     implementation 'com.chootdev:blurimg:1.0.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     //implement Dagger the latest version (current)
 

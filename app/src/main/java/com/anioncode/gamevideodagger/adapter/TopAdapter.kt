@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.model.ranked.Result
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cardfilm.view.*
 
 class TopAdapter: RecyclerView.Adapter<ViewHolder>() {
@@ -37,7 +38,13 @@ class TopAdapter: RecyclerView.Adapter<ViewHolder>() {
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var model=items.get(position)
+        holder.title.text=model.name
+        holder.type.text="${model.rating}/${model.rating_top}"
 
+        Picasso.get()
+            .load(model.background_image)
+            .noFade()
+            .into( holder.photoGame);
 
     }
 }
@@ -45,5 +52,7 @@ class TopAdapter: RecyclerView.Adapter<ViewHolder>() {
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each video to
     val title = view.title
-    
+    val type = view.type
+    val photoGame = view.photoGame
+
 }

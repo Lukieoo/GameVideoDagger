@@ -1,10 +1,11 @@
-package com.anioncode.gamevideodagger
+package com.anioncode.gamevideodagger.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.model.ranked.TopGames
 import com.anioncode.gamevideodagger.ui.VideoViewModel
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         // With ViewModelFactory
       //  val viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
 
-        viewModel.authenticateWithId("2019-01-01,2019-12-31")
+        viewModel.authenticateWithId("2020-01-01,2020-12-31")
 
         initRecyclerView();
         subscribeObservers()
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.observeUser()!!.observe(this, object : Observer<TopGames?> {
                 override fun onChanged(t: TopGames?) {
                     if (t != null) {
-                        text.text="${t.results.get(0).name}"
+
                         adapter.setPosts(t.results)
                     }
                 }
