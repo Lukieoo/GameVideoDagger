@@ -2,6 +2,7 @@ package com.anioncode.gamevideodagger.dagger
 
 import com.anioncode.gamevideodagger.MainActivity
 import com.anioncode.gamevideodagger.network.AuthModule
+import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -25,13 +26,20 @@ abstract class VideoModule {
     abstract fun contributeMainActivity(): MainActivity //Must call how our main Activity
 
     companion object {
+        @Provides
+        @JvmStatic
+        open fun provideAdapter(): TopAdapter {
+            return TopAdapter();
+        }
+
 
         @Singleton
         @Provides
         @JvmStatic
         open fun provideRetrofitInstance(): Retrofit {
             return Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
+//                .baseUrl("https://jsonplaceholder.typicode.com")
+                .baseUrl("https://api.rawg.io")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

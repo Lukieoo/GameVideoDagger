@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.anioncode.gamevideodagger.model.tmpUsersItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.anioncode.gamevideodagger.model.ranked.TopGames
 import com.anioncode.gamevideodagger.ui.VideoViewModel
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
+import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
+
+    @Inject
+    lateinit var  adapter:TopAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,22 +39,33 @@ class MainActivity : AppCompatActivity() {
         // With ViewModelFactory
       //  val viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
 
-        viewModel.authenticateWithId(3);
+        viewModel.authenticateWithId("2019-01-01,2019-12-31")
+
+        initRecyclerView();
         subscribeObservers()
+
     }
 
 
     private fun subscribeObservers() {
        // if (::viewModel.isInitialized){
-            viewModel.observeUser()!!.observe(this, object : Observer<tmpUsersItem?> {
-                override fun onChanged(t: tmpUsersItem?) {
+            viewModel.observeUser()!!.observe(this, object : Observer<TopGames?> {
+                override fun onChanged(t: TopGames?) {
                     if (t != null) {
-                        text.text="${t.username}"
+                        text.text="${t.results.get(0).name}"
+                        adapter.setPosts(t.results)
                     }
                 }
             })
      //   }
 
 
+    }
+
+    private fun initRecyclerView() {
+        val layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setLayoutManager(layoutManager)
+        recyclerView.setAdapter(adapter)
     }
 }

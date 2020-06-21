@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.anioncode.gamevideodagger"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"

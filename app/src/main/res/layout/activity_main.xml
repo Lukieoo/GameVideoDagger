@@ -78,6 +78,7 @@
     </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         tools:listitem="@layout/cardfilm"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"

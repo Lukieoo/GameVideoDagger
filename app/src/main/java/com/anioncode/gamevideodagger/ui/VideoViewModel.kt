@@ -1,10 +1,13 @@
 package com.anioncode.gamevideodagger.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.anioncode.gamevideodagger.model.tmpUsersItem
+import com.anioncode.gamevideodagger.model.ranked.Result
+import com.anioncode.gamevideodagger.model.ranked.TopGames
+import com.anioncode.gamevideodagger.model.tmpmodel.tmpUsersItem
 import com.anioncode.gamevideodagger.network.AuthApi
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -13,28 +16,29 @@ class VideoViewModel : ViewModel {
 
     private val authApi: AuthApi
 
-    private val authUser: MediatorLiveData<tmpUsersItem> = MediatorLiveData<tmpUsersItem>()
+    private val authUser: MediatorLiveData<TopGames> = MediatorLiveData<TopGames>()
 
     @Inject constructor( authApis: AuthApi) {
 
         authApi = authApis
     }
 
-    fun authenticateWithId(userId: Int) {
-        val source: LiveData<tmpUsersItem> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getUsers(userId)
+    fun authenticateWithId(dates: String) {
+        val source: LiveData<TopGames> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getTopGames(dates,"-added")
                 .subscribeOn(Schedulers.io())
         )
-        authUser.addSource<tmpUsersItem>(source, object : androidx.lifecycle.Observer<tmpUsersItem?> {
+        authUser.addSource<TopGames>(source, object : androidx.lifecycle.Observer<TopGames?> {
 
-            override fun onChanged(t: tmpUsersItem?) {
+            override fun onChanged(t: TopGames?) {
+                Log.d("TAG", "VideoonChanged: $t")
                 authUser.setValue(t)
                 authUser.removeSource(source)
             }
         })
     }
 
-    fun observeUser(): LiveData<tmpUsersItem?>? {
+    fun observeUser(): LiveData<TopGames?>? {
         return authUser
     }
 

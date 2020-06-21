@@ -1,4 +1,4 @@
-package com.anioncode.gamevideodagger.model
+package com.anioncode.gamevideodagger.model.tmpmodel
 
 data class Geo(
     val lat: String,

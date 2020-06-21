@@ -1,4 +1,7 @@
-package com.anioncode.gamevideodagger.model
+package com.anioncode.gamevideodagger.model.tmpmodel
+
+import com.anioncode.gamevideodagger.model.tmpmodel.Address
+import com.anioncode.gamevideodagger.model.tmpmodel.Company
 
 data class tmpUsersItem(
     val address: Address,

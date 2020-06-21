@@ -1,4 +1,4 @@
-package com.anioncode.gamevideodagger.model
+package com.anioncode.gamevideodagger.model.tmpmodel
 
 data class Company(
     val bs: String,
