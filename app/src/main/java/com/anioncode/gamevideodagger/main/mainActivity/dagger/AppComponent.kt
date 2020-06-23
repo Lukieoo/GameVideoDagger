@@ -1,7 +1,9 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.main.mainActivity.dagger
 
 import android.app.Application
-import com.anioncode.gamevideodagger.main.home.MainFragmentBuildersModule
+import com.anioncode.gamevideodagger.main.homeFragment.MainFragmentBuildersModule
+import com.anioncode.gamevideodagger.main.mainActivity.DaggerApplication
+import com.anioncode.gamevideodagger.main.previewActivity.PreviewGameActivityBuildersModule
 import com.anioncode.gamevideodagger.network.AuthModule
 import com.anioncode.gamevideodagger.viewmodels.ViewModelFactoryModule
 import dagger.BindsInstance
@@ -19,6 +21,8 @@ import javax.inject.Singleton
         VideoModule::class,
         ViewModelFactoryModule::class,
         MainFragmentBuildersModule::class,
+        PreviewGameActivityBuildersModule::class,
+
 
         DataViewModelsModule::class,
         AuthModule::class

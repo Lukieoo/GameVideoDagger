@@ -39,12 +39,13 @@ class LatestAdapter: RecyclerView.Adapter<ViewHolder1>() {
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder1, position: Int) {
         var model=items.get(position)
+
         Picasso.get()
 
             .load(model.background_image)
 //            .load("https://media.rawg.io/media/games/2ad/2ad87a4a69b1104f02435c14c5196095.jpg")
             .resize(400,300)
-            .networkPolicy(NetworkPolicy.OFFLINE)
+          //  .networkPolicy(NetworkPolicy.OFFLINE)
             .into( holder.photoGame);
 
     }

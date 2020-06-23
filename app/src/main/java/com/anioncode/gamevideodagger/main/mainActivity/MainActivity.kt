@@ -1,19 +1,10 @@
-package com.anioncode.gamevideodagger.main
+package com.anioncode.gamevideodagger.main.mainActivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.anioncode.gamevideodagger.R
-import com.anioncode.gamevideodagger.main.home.HomeFragment
-import com.anioncode.gamevideodagger.model.ranked.TopGames
-import com.anioncode.gamevideodagger.ui.VideoViewModel
-import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
-import com.anioncode.smogu.Adapter.TopAdapter
+import com.anioncode.gamevideodagger.main.homeFragment.HomeFragment
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {

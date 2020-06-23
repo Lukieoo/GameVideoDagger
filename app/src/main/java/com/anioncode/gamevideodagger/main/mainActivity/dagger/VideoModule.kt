@@ -1,14 +1,15 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.main.mainActivity.dagger
 
 import android.app.Application
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.widget.Toast
-import com.anioncode.gamevideodagger.main.MainActivity
-import com.anioncode.gamevideodagger.main.PreviewGameActivity
+import com.anioncode.gamevideodagger.main.mainActivity.MainActivity
+import com.anioncode.gamevideodagger.main.previewActivity.PreviewGameActivity
 import com.anioncode.gamevideodagger.model.ranked.Result
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -36,9 +37,12 @@ abstract class VideoModule {
 
                 override fun onClick(game: Result) {
                     Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
-                    var intent= Intent(application.applicationContext,PreviewGameActivity::class.java).apply {
+                    var intent= Intent(application.applicationContext,
+                        PreviewGameActivity::class.java).apply {
                         putExtra("GameListBackround",game.background_image)
                         putExtra("GameListColor",game.dominant_color)
+
+                        putExtra("GameData", Gson().toJson(game))
 
                     }
                     intent.flags=FLAG_ACTIVITY_NEW_TASK

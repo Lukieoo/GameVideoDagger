@@ -15,4 +15,10 @@
         <item name="android:homeAsUpIndicator">@color/textcolorWhite</item>
         <item name="colorControlNormal">@color/textcolorWhite</item>
     </style>
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/textcolorWhite</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

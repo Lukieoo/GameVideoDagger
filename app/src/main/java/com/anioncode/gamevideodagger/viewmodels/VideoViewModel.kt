@@ -1,4 +1,4 @@
-package com.anioncode.gamevideodagger.ui
+package com.anioncode.gamevideodagger.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData

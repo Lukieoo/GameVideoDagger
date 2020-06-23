@@ -1,6 +1,7 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.main.mainActivity
 
 import android.app.Application
+import com.anioncode.gamevideodagger.main.mainActivity.dagger.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject

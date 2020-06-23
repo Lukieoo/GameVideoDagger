@@ -4,12 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.model.ranked.Result
 import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_popular.view.*
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -54,10 +61,13 @@ class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<Vi
         holder.itemView.setOnClickListener {
             itemClick.onClick(model)
         }
+
         Picasso.get()
             .load(model.background_image)
-            .resize(690,532)
-            .networkPolicy(NetworkPolicy.OFFLINE)
+//            .load("https://media.rawg.io/media/screenshots/8f2/8f244e48c17956579abc3efd0a663fd6.jpg")
+
+            .resize(750,500)
+
             .into( holder.photoGame);
 
     }

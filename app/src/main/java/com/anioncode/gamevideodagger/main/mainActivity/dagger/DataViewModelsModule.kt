@@ -1,7 +1,7 @@
-package com.anioncode.gamevideodagger.dagger
+package com.anioncode.gamevideodagger.main.mainActivity.dagger
 
 import androidx.lifecycle.ViewModel
-import com.anioncode.gamevideodagger.ui.VideoViewModel
+import com.anioncode.gamevideodagger.viewmodels.VideoViewModel
 import com.anioncode.gamevideodagger.viewmodels.ViewModelKey
 import dagger.Binds
 import dagger.Module

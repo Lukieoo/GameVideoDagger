@@ -1,5 +1,7 @@
 package com.anioncode.gamevideodagger.model.ranked
 
+import java.io.Serializable
+
 data class Result(
     val added: Int,
     val added_by_status: AddedByStatus,
@@ -29,4 +31,4 @@ data class Result(
     val tags: List<Tag>,
     val tba: Boolean,
     val user_game: Any
-)
+):Serializable

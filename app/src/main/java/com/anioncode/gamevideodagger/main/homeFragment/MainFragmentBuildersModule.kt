@@ -1,6 +1,5 @@
-package com.anioncode.gamevideodagger.main.home
+package com.anioncode.gamevideodagger.main.homeFragment
 
-import com.anioncode.gamevideodagger.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
