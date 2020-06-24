@@ -2,6 +2,7 @@ package com.anioncode.gamevideodagger.main.previewActivity
 
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.ScreenAdapter
+import com.anioncode.smogu.Adapter.TypeAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -19,6 +20,13 @@ abstract class PreviewGameActivityBuildersModule {
         @JvmStatic
         open fun provideAdapterScreen(): ScreenAdapter {
             return ScreenAdapter();
+        }
+
+        @Singleton
+        @Provides
+        @JvmStatic
+        open fun provideAdapterType(): TypeAdapter {
+            return TypeAdapter();
         }
     }
 }

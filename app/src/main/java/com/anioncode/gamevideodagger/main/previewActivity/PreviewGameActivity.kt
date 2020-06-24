@@ -14,6 +14,8 @@ import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -21,10 +23,12 @@ import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
 import com.anioncode.gamevideodagger.model.ranked.Result
 import com.anioncode.smogu.Adapter.ScreenAdapter
+import com.anioncode.smogu.Adapter.TypeAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import javax.inject.Inject
 
@@ -36,6 +40,8 @@ class PreviewGameActivity : BaseActivity() {
 
     @Inject
     lateinit var adapter1: ScreenAdapter
+    @Inject
+    lateinit var adapter2: TypeAdapter
 
     lateinit var gameData: String
 
@@ -58,7 +64,7 @@ class PreviewGameActivity : BaseActivity() {
 
         gson = Gson()
         gameDataJSON = gson?.fromJson(gameData, Result::class.java)
-//        initRecyclerView()
+        initRecyclerView()
         initViewPager();
         toolbar.setNavigationOnClickListener {
             finish()
@@ -188,6 +194,10 @@ class PreviewGameActivity : BaseActivity() {
         }
         adapter1.setPosts(gameDataJSON.short_screenshots)
     }
-
+    private fun initRecyclerView() {
+        gangerGame.setLayoutManager(LinearLayoutManager(this@PreviewGameActivity, LinearLayoutManager.HORIZONTAL, false ))
+        gangerGame.setAdapter(adapter2)
+        adapter2.setPosts(gameDataJSON.genres)
+    }
 
 }
