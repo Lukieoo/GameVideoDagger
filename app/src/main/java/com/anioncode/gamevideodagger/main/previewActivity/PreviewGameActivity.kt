@@ -14,6 +14,8 @@ import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,12 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
+import com.anioncode.gamevideodagger.main.previewActivity.viewModel.SingleViewModel
+import com.anioncode.gamevideodagger.model.gamemodel.InfoGame
 import com.anioncode.gamevideodagger.model.ranked.Result
+import com.anioncode.gamevideodagger.model.ranked.TopGames
+import com.anioncode.gamevideodagger.viewmodels.VideoViewModel
+import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.ScreenAdapter
 import com.anioncode.smogu.Adapter.TypeAdapter
 import com.google.android.material.appbar.AppBarLayout
@@ -34,12 +41,12 @@ import javax.inject.Inject
 
 
 class PreviewGameActivity : BaseActivity() {
-    private var bar: ProgressDialog? = null ///TODO Repair usages
-    private val path = "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"
+
     private var ctlr: MediaController? = null
 
     @Inject
     lateinit var adapter1: ScreenAdapter
+
     @Inject
     lateinit var adapter2: TypeAdapter
 
@@ -47,6 +54,11 @@ class PreviewGameActivity : BaseActivity() {
 
     lateinit var gson: Gson
     lateinit var gameDataJSON: Result
+
+    lateinit var viewModel: SingleViewModel
+
+    @Inject
+    lateinit var providerFactory: ViewModelProviderFactory
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,6 +146,7 @@ class PreviewGameActivity : BaseActivity() {
         titleGameToolbar.text = gameDataJSON.name
         rateGameToolbar.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
 
+        text3.text = gameDataJSON.released
         titleGame.isSelected = true;
         titleGame.text = gameDataJSON.name
         rateGame.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
@@ -145,36 +158,48 @@ class PreviewGameActivity : BaseActivity() {
             val uri: Uri = Uri.parse(gameDataJSON.clip.clip)
 
 
-            bar = ProgressDialog(this@PreviewGameActivity)
-            bar!!.setTitle("Connecting server")
-            bar!!.setMessage("Please Wait... ")
-            bar!!.setCancelable(false)
-            bar!!.show()
-            if (bar!!.isShowing()) {
-                clipGame.setVideoURI(uri)
-                clipGame.seekTo(2);
 
-                clipGame.setOnPreparedListener(object : MediaPlayer.OnPreparedListener {
-                    override fun onPrepared(mp: MediaPlayer) {
-                        mp.setOnVideoSizeChangedListener { mp, width, height ->
-                            /** add media controller*/
-                            ctlr = MediaController(this@PreviewGameActivity)
-                            clipGame.setMediaController(ctlr)
-                            /* and set its position on screen*/
+            clipGame.setVideoURI(uri)
+            clipGame.seekTo(2);
 
-                            ctlr!!.setAnchorView(clipGame)
-                            //                clipGame.requestFocus()
-                        }
+            clipGame.setOnPreparedListener(object : MediaPlayer.OnPreparedListener {
+                override fun onPrepared(mp: MediaPlayer) {
+                    mp.setOnVideoSizeChangedListener { mp, width, height ->
+                        /** add media controller*/
+                        ctlr = MediaController(this@PreviewGameActivity)
+                        clipGame.setMediaController(ctlr)
+                        /* and set its position on screen*/
+
+                        ctlr!!.setAnchorView(clipGame)
+                        //                clipGame.requestFocus()
                     }
-                })
-            }
-            bar!!.dismiss()
+                }
+            })
+
 
         } else {
             clipGame.visibility = View.GONE
         }
-    }
 
+
+        viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
+        viewModel.getInfoAboutGame(gameDataJSON.slug)
+
+        subscribeObservers()
+    }
+    private fun subscribeObservers() {
+        viewModel.observeSingle()!!.observe(this, object : Observer<InfoGame?> {
+            override fun onChanged(t: InfoGame?) {
+                if (t != null) {
+
+                    description.text=t.description_raw
+
+
+                }
+            }
+        })
+
+    }
     private fun initViewPager() {
         viewPager.apply {
             adapter = adapter1
@@ -194,10 +219,21 @@ class PreviewGameActivity : BaseActivity() {
         }
         adapter1.setPosts(gameDataJSON.short_screenshots)
     }
+
     private fun initRecyclerView() {
-        gangerGame.setLayoutManager(LinearLayoutManager(this@PreviewGameActivity, LinearLayoutManager.HORIZONTAL, false ))
+        gangerGame.setLayoutManager(
+            LinearLayoutManager(
+                this@PreviewGameActivity,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
         gangerGame.setAdapter(adapter2)
         adapter2.setPosts(gameDataJSON.genres)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

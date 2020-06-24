@@ -10,7 +10,7 @@ import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_popular.view.*
 
-class LatestAdapter: RecyclerView.Adapter<ViewHolder1>() {
+class LatestAdapter(var itemClick: OnClickAdapterListner): RecyclerView.Adapter<ViewHolder1>() {
 
     lateinit var items: ArrayList<Result>
     // Gets the number of games in the list
@@ -23,7 +23,9 @@ class LatestAdapter: RecyclerView.Adapter<ViewHolder1>() {
         }
 
     }
-
+    interface  OnClickAdapterListner{
+        fun onClick( game:Result)
+    }
     fun setPosts(items: List<Result>) {
         this.items = items as ArrayList<Result>
         notifyDataSetChanged()
@@ -39,7 +41,9 @@ class LatestAdapter: RecyclerView.Adapter<ViewHolder1>() {
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder1, position: Int) {
         var model=items.get(position)
-
+        holder.itemView.setOnClickListener {
+            itemClick.onClick(model)
+        }
         Picasso.get()
 
             .load(model.background_image)

@@ -7,7 +7,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.anioncode.gamevideodagger.model.ranked.Result
 import com.anioncode.gamevideodagger.model.ranked.TopGames
-import com.anioncode.gamevideodagger.model.tmpmodel.tmpUsersItem
 import com.anioncode.gamevideodagger.network.AuthApi
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

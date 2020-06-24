@@ -51,7 +51,9 @@ class ScreenAdapter() : RecyclerView.Adapter<ViewHolder3>() {
         var model=items.get(position)
         Picasso.get()
             .load(model.image)
+            .resize(850,650)
             .into( holder.photoGame);
+
 
     }
 }

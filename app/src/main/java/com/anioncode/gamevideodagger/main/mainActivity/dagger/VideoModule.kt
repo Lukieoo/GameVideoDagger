@@ -54,8 +54,24 @@ abstract class VideoModule {
         @Singleton
         @Provides
         @JvmStatic
-        open fun provideAdapter1(): LatestAdapter {
-            return LatestAdapter();
+        open fun provideAdapter1(application: Application): LatestAdapter {
+            return LatestAdapter(itemClick = object : LatestAdapter.OnClickAdapterListner {
+
+                override fun onClick(game: Result) {
+                    // Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
+                    var intent= Intent(application.applicationContext,
+                        PreviewGameActivity::class.java).apply {
+                        putExtra("GameListBackround",game.background_image)
+                        putExtra("GameListColor",game.dominant_color)
+
+                        putExtra("GameData", Gson().toJson(game))
+
+                    }
+                    intent.flags=FLAG_ACTIVITY_NEW_TASK
+                    application.applicationContext.startActivity(intent)
+                }
+
+            });
         }
 
         @Singleton
