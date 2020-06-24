@@ -8,9 +8,9 @@
     tools:context=".main.previewActivity.PreviewGameActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:id="@+id/appbarlayout"
         android:backgroundTint="@color/maincolorapp"
         android:foregroundTint="@color/maincolorapp"
         android:theme="@style/ThemeOverlay.AppCompat.Light">
@@ -20,8 +20,6 @@
             android:id="@+id/colapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:title=""
-            app:titleEnabled="true"
             android:backgroundTint="@color/maincolorapp"
             android:fitsSystemWindows="true"
             android:foregroundTint="@color/maincolorapp"
@@ -29,7 +27,9 @@
             app:expandedTitleMarginBottom="20dp"
             app:expandedTitleMarginStart="20dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:title=""
+            app:titleEnabled="true">
 
             <ImageView
                 android:id="@+id/back"
@@ -50,8 +50,48 @@
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/titleGameToolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/rateGameToolbar"
+                        android:ellipsize="marquee"
+                        android:fontFamily="@font/productsansmedium"
+                        android:letterSpacing="0.1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Gunfire Ranger"
+                        android:textColor="@color/textcolorWhite"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/rateGameToolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/starToolbar"
+                        android:fontFamily="@font/productsansmedium"
+                        android:text="9.4"
+
+                        android:textColor="@color/colorcomponnent"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/starToolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_star"
+                        android:tint="@color/colorcomponnent" />
+                </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -59,60 +99,122 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/cardstates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-40dp"
         android:elevation="0dp"
         android:overScrollMode="never"
-        app:cardBackgroundColor="@android:color/transparent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="match_parent"
+            android:elevation="0dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/titleGame"
+                <RelativeLayout
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/productsansmedium"
-                    android:letterSpacing="0.1"
-                    android:padding="20dp"
-                    android:text="Gunfire Ranger"
-                    android:textColor="@color/textcolorWhite"
-                    android:textSize="25sp"
-                    android:layout_toLeftOf="@+id/rateGame"
-                    />
+                    android:elevation="0dp">
+
+                    <TextView
+                        android:id="@+id/titleGame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/rateGame"
+                        android:ellipsize="marquee"
+                        android:fontFamily="@font/productsansmedium"
+                        android:letterSpacing="0.1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:padding="20dp"
+                        android:singleLine="true"
+                        android:text="Gunfire Ranger"
+                        android:textColor="@color/textcolorWhite"
+                        android:textSize="25sp" />
+
+                    <TextView
+
+                        android:id="@+id/rateGame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/star"
+                        android:fontFamily="@font/productsansmedium"
+                        android:text="9.4"
+                        android:textColor="@color/colorcomponnent"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_star"
+                        android:tint="@color/colorcomponnent" />
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/rateGame"
+                    android:id="@+id/text0"
+                    android:layout_below="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/star"
                     android:fontFamily="@font/productsansmedium"
-                    android:text="9.4"
+                    android:letterSpacing="0.15"
+                    android:text="• Video"
+                    android:layout_marginStart="20dp"
                     android:textColor="@color/colorcomponnent"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/star"
+                    android:textSize="14sp" />
+                <VideoView
+                    android:id="@+id/clipGame"
+                    android:layout_width="400dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/text0"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="20dp" />
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_below="@+id/clipGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/ic_star"
-                    android:tint="@color/colorcomponnent" />
+                    android:fontFamily="@font/productsansmedium"
+                    android:letterSpacing="0.15"
+                    android:text="• Screenshoots"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/colorcomponnent"
+                    android:textSize="14sp" />
+                <androidx.viewpager2.widget.ViewPager2
+                    tools:listitem="@layout/item_screen"
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_below="@+id/text"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp" />
+
             </RelativeLayout>
 
         </androidx.core.widget.NestedScrollView>
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--tools:listitem="@layout/item_screen"-->
+<!--android:id="@+id/recyclerViewScreen"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_below="@+id/clipGame"-->
+<!--android:layout_marginLeft="20dp"-->
+<!--android:layout_marginTop="10dp"-->
+<!--android:layout_marginRight="20dp" />-->

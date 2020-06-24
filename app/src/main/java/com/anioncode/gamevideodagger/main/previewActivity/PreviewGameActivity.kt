@@ -1,31 +1,50 @@
 package com.anioncode.gamevideodagger.main.previewActivity
 
+import android.app.ProgressDialog
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.MediaController
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
 import com.anioncode.gamevideodagger.model.ranked.Result
+import com.anioncode.smogu.Adapter.ScreenAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
-import org.json.JSONObject
 import java.util.*
+import javax.inject.Inject
 
 
-class PreviewGameActivity : BaseActivity(){
+class PreviewGameActivity : BaseActivity() {
+    private var bar: ProgressDialog? = null ///TODO Repair usages
+    private val path = "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"
+    private var ctlr: MediaController? = null
+
+    @Inject
+    lateinit var adapter1: ScreenAdapter
+
+    lateinit var gameData: String
+
+    lateinit var gson: Gson
+    lateinit var gameDataJSON: Result
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
 
-         var gameData: String
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview_game)
@@ -34,20 +53,17 @@ class PreviewGameActivity : BaseActivity(){
         Objects.requireNonNull(supportActionBar!!.setDisplayHomeAsUpEnabled(true))
         val navIcon: Drawable = toolbar.getNavigationIcon()!!
 
-        gameData= intent.extras!!.getString("GameData").toString()
+        gameData = intent.extras!!.getString("GameData").toString()
 
 
-        var gson = Gson()
-        var gameDataJSON = gson?.fromJson(gameData, Result::class.java)
-
-        println("LOGDDDDDDD $gameData")
-
-
-        toolbar.setNavigationOnClickListener{
+        gson = Gson()
+        gameDataJSON = gson?.fromJson(gameData, Result::class.java)
+//        initRecyclerView()
+        initViewPager();
+        toolbar.setNavigationOnClickListener {
             finish()
         }
-//
-//
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             navIcon.setColorFilter(BlendModeColorFilter(Color.WHITE, BlendMode.SRC_ATOP));
         } else {
@@ -66,35 +82,112 @@ class PreviewGameActivity : BaseActivity(){
                 colapsing.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
                 Log.d("STATE", state!!.name)
 
-                if ( state!!.name.equals("COLLAPSED")){
+                if (state!!.name.equals("COLLAPSED")) {
 
-                    colapsing!!.title=gameDataJSON.name
-                    titleGame.visibility= View.INVISIBLE
-                    rateGame.visibility= View.INVISIBLE
-                    star.visibility= View.INVISIBLE
+//                    colapsing!!.title=gameDataJSON.name
 
-                }else if( state!!.name.equals("IDLE")){
-                    colapsing!!.title=""
-                    titleGame.visibility= View.VISIBLE
-                    rateGame.visibility= View.VISIBLE
-                    star.visibility= View.VISIBLE
-                }
-                else{
-                    colapsing!!.title=""
-                    titleGame.visibility= View.VISIBLE
-                    rateGame.visibility= View.VISIBLE
-                    star.visibility= View.VISIBLE
+                    titleGameToolbar.visibility = View.VISIBLE
+                    rateGameToolbar.visibility = View.VISIBLE
+                    starToolbar.visibility = View.VISIBLE
+
+                    titleGame.visibility = View.INVISIBLE
+                    rateGame.visibility = View.INVISIBLE
+                    star.visibility = View.INVISIBLE
+
+                } else if (state!!.name.equals("IDLE")) {
+
+                    titleGameToolbar.visibility = View.INVISIBLE
+                    rateGameToolbar.visibility = View.INVISIBLE
+                    starToolbar.visibility = View.INVISIBLE
+
+                    titleGame.visibility = View.VISIBLE
+                    rateGame.visibility = View.VISIBLE
+                    star.visibility = View.VISIBLE
+
+                    if (ctlr != null) ctlr!!.hide()
+                } else {
+
+                    titleGameToolbar.visibility = View.INVISIBLE
+                    rateGameToolbar.visibility = View.INVISIBLE
+                    starToolbar.visibility = View.INVISIBLE
+
+                    titleGame.visibility = View.VISIBLE
+                    rateGame.visibility = View.VISIBLE
+                    star.visibility = View.VISIBLE
+
+                    if (ctlr != null) ctlr!!.hide()
                 }
             }
         })
+
         cardstates.setBackgroundResource(R.drawable.cornerdrawable);
+
         setTitle("");
 
-        titleGame.text=gameDataJSON.name
-        rateGame.text="${gameDataJSON.rating}/${gameDataJSON.rating_top}"
+        titleGameToolbar.isSelected = true;  // Set focus to the textview
+        titleGameToolbar.text = gameDataJSON.name
+        rateGameToolbar.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
+
+        titleGame.isSelected = true;
+        titleGame.text = gameDataJSON.name
+        rateGame.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
         Picasso.get()
             .load(gameDataJSON.background_image)
-            //.networkPolicy(NetworkPolicy.OFFLINE)
-            .into(back);
+            .into(back)
+
+        if (gameDataJSON.clip != null) {
+            val uri: Uri = Uri.parse(gameDataJSON.clip.clip)
+
+
+            bar = ProgressDialog(this@PreviewGameActivity)
+            bar!!.setTitle("Connecting server")
+            bar!!.setMessage("Please Wait... ")
+            bar!!.setCancelable(false)
+            bar!!.show()
+            if (bar!!.isShowing()) {
+                clipGame.setVideoURI(uri)
+                clipGame.seekTo(2);
+
+                clipGame.setOnPreparedListener(object : MediaPlayer.OnPreparedListener {
+                    override fun onPrepared(mp: MediaPlayer) {
+                        mp.setOnVideoSizeChangedListener { mp, width, height ->
+                            /** add media controller*/
+                            ctlr = MediaController(this@PreviewGameActivity)
+                            clipGame.setMediaController(ctlr)
+                            /* and set its position on screen*/
+
+                            ctlr!!.setAnchorView(clipGame)
+                            //                clipGame.requestFocus()
+                        }
+                    }
+                })
+            }
+            bar!!.dismiss()
+
+        } else {
+            clipGame.visibility = View.GONE
+        }
     }
+
+    private fun initViewPager() {
+        viewPager.apply {
+            adapter = adapter1
+            clipChildren = false
+            clipToPadding = false
+            offscreenPageLimit = 3
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+            var compositePageTransformer = CompositePageTransformer()
+
+            compositePageTransformer.addTransformer(MarginPageTransformer(40))
+            compositePageTransformer.addTransformer { page, position ->
+                var r: Float = 1 - Math.abs(position)
+                page.scaleY = 0.85f + r * 0.15f
+            }
+            setPageTransformer(compositePageTransformer)
+        }
+        adapter1.setPosts(gameDataJSON.short_screenshots)
+    }
+
+
 }

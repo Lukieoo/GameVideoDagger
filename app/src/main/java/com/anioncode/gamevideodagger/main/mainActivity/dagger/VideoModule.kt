@@ -36,7 +36,7 @@ abstract class VideoModule {
             return TopAdapter (itemClick = object : TopAdapter.OnClickAdapterListner{
 
                 override fun onClick(game: Result) {
-                    Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
+                   // Toast.makeText(application.applicationContext,"Dziala",Toast.LENGTH_LONG).show()
                     var intent= Intent(application.applicationContext,
                         PreviewGameActivity::class.java).apply {
                         putExtra("GameListBackround",game.background_image)

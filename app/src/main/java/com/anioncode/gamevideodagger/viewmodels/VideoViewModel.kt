@@ -33,7 +33,7 @@ class VideoViewModel : ViewModel {
         authUser.addSource<TopGames>(source, object : androidx.lifecycle.Observer<TopGames?> {
 
             override fun onChanged(t: TopGames?) {
-                Log.d("TAG", "VideoonChanged: $t")
+             //   Log.d("TAG", "VideoonChanged: $t")
                 authUser.setValue(t)
                 authUser.removeSource(source)
             }
@@ -53,7 +53,7 @@ class VideoViewModel : ViewModel {
         latestGames.addSource<TopGames>(source, object : androidx.lifecycle.Observer<TopGames?> {
 
             override fun onChanged(t: TopGames?) {
-                Log.d("TAG", "VideoonChanged: $t")
+                //Log.d("TAG", "VideoonChanged: $t")
                 latestGames.setValue(t)
                 latestGames.removeSource(source)
             }
