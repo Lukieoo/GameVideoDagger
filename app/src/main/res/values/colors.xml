@@ -4,9 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="maincolorapp">#20232B</color>
-<!--    <color name="maincolorapp">#0f0f0f</color>-->
-    <color name="colorcomponnent">#FEDC33</color>
+<!--    <color name="maincolorapp">#20232B</color>-->
+    <color name="maincolorapp">#0f0f0f</color>
+<!--    <color name="colorcomponnent">#FEDC33</color>-->
+    <color name="colorcomponnent">#ffffff</color>
     <color name="textcolorGrey">#53575F</color>
     <color name="textcolorWhite">#ffffff</color>
 </resources>

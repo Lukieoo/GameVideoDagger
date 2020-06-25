@@ -2,14 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:iconTint="@color/textcolorGrey"
         android:title="Home" />
     <item
+        android:id="@+id/dashboard"
         android:icon="@drawable/ic_dashboard"
         android:iconTint="@color/textcolorGrey"
         android:title="Filter" />
     <item
+        android:id="@+id/account"
         android:icon="@drawable/ic_account"
         android:iconTint="@color/textcolorGrey"
         android:title="My Storage" />

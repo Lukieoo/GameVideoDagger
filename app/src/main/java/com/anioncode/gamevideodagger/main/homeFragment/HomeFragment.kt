@@ -15,7 +15,11 @@ import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.date1
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class HomeFragment : DaggerFragment() {
@@ -41,9 +45,29 @@ class HomeFragment : DaggerFragment() {
 
 //        With ViewModelFactory
         val viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
-        viewModel.authenticateWithId("2019-01-01,2020-05-31")
-        viewModel.authenticateWithString("2020-01-01,2020-12-31")
 
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val getYear = SimpleDateFormat("yyyy")
+
+
+        println("${(getYear.format(Date()).toInt()-2)} rembrantttttttt")
+
+        view.date1.text="${(getYear.format(Date()).toInt()-2)}"
+        view.date2.text="${(getYear.format(Date()).toInt()-1)}"
+        view.date3.text="${getYear.format(Date())}"
+
+        viewModel.authenticateWithId("${(getYear.format(Date()).toString().toInt())}-01-01,${sdf.format(Date())}")
+        viewModel.authenticateWithString("${getYear.format(Date())}-01-01,${getYear.format(Date())}-12-31")
+
+        view.date1.setOnClickListener {
+            viewModel.authenticateWithId("${view.date1.text}-01-01,${view.date1.text}-12-31")
+        }
+        view.date2.setOnClickListener {
+            viewModel.authenticateWithId("${view.date2.text}-01-01,${view.date2.text}-12-31")
+        }
+        view.date3.setOnClickListener {
+            viewModel.authenticateWithId("${view.date3.text}-01-01,${sdf.format(Date())}")
+        }
         initRecyclerView(view);
         initRecyclerView1(view);
         subscribeObservers()
@@ -57,7 +81,6 @@ class HomeFragment : DaggerFragment() {
                 if (t != null) {
 
                     adapter.setPosts(t.results)
-                    println("Holer ER1")
 
                 }
             }
@@ -66,7 +89,7 @@ class HomeFragment : DaggerFragment() {
             override fun onChanged(t: TopGames?) {
                 if (t != null) {
                     adapter1.setPosts(t.results)
-                    println("Holer ER2")
+
                 }
             }
         })
@@ -83,6 +106,7 @@ class HomeFragment : DaggerFragment() {
 
         view.recyclerView1.setLayoutManager(GridLayoutManager(activity, 3))
         view.recyclerView1.setAdapter(adapter1)
+
     }
 
 }

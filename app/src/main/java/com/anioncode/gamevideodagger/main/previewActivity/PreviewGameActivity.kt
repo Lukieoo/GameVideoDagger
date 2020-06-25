@@ -179,6 +179,7 @@ class PreviewGameActivity : BaseActivity() {
 
         } else {
             clipGame.visibility = View.GONE
+            text0.visibility=View.GONE
         }
 
 

@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".main.previewActivity.PreviewGameActivity"></activity>
+        <activity android:name=".main.previewActivity.PreviewGameActivity"
+            android:launchMode="singleTask"
+            ></activity>
         <activity android:name=".main.mainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

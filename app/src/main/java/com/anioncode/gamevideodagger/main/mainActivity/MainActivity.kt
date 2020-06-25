@@ -1,22 +1,20 @@
 package com.anioncode.gamevideodagger.main.mainActivity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.anioncode.gamevideodagger.R
+import com.anioncode.gamevideodagger.main.filterFragment.FilterFragment
 import com.anioncode.gamevideodagger.main.homeFragment.HomeFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() ,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
-
-//    lateinit var viewModel: VideoViewModel
-//
-//    @Inject
-//    lateinit var providerFactory: ViewModelProviderFactory
-//
-//    @Inject
-//    lateinit var  adapter:TopAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,39 +24,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
-        //viewModel = ViewModelProviders.of(this, providerFactory).get(VideoViewModel::class.java)
-//        viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
 
-        // With ViewModelFactory
-        //  val viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
+        bottom_navigation.setOnNavigationItemSelectedListener(this@MainActivity)
 
-//        viewModel.authenticateWithId("2020-01-01,2020-12-31")
-//
-//        initRecyclerView();
-//        subscribeObservers()
 
     }
-//
-//
-//    private fun subscribeObservers() {
-//       // if (::viewModel.isInitialized){
-//            viewModel.observeUser()!!.observe(this, object : Observer<TopGames?> {
-//                override fun onChanged(t: TopGames?) {
-//                    if (t != null) {
-//
-//                        adapter.setPosts(t.results)
-//                    }
-//                }
-//            })
-//     //   }
-//
-//
-//    }
-//
-//    private fun initRecyclerView() {
-//        val layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        recyclerView.setLayoutManager(layoutManager)
-//        recyclerView.setAdapter(adapter)
-//    }
+
+    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+
+        when (p0.itemId) {
+            R.id.home -> {
+                print("deto1")
+                supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+                return  true
+            }
+            R.id.dashboard -> {
+                print("deto2")
+                supportFragmentManager.beginTransaction().replace(R.id.myframe, FilterFragment()).commit()
+                return true
+            }
+            R.id.account -> {
+                print("deto3")
+                supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+                return   true
+            }
+            else -> { // Note the block
+                return   true
+            }
+        }
+        return    true
+    }
+
 }
