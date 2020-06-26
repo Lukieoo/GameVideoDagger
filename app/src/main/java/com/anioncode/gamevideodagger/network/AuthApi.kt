@@ -1,8 +1,8 @@
 package com.anioncode.gamevideodagger.network
 
-import com.anioncode.gamevideodagger.model.gamemodel.InfoGame
-import com.anioncode.gamevideodagger.model.ranked.Result
-import com.anioncode.gamevideodagger.model.ranked.TopGames
+import com.anioncode.gamevideodagger.model.detailModel.InfoGame
+import com.anioncode.gamevideodagger.model.popularModel.TopGames
+import com.anioncode.gamevideodagger.model.searchModel.SearchModel
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,4 +18,8 @@ interface AuthApi {
 
     @GET("/api/games/{name}")
     fun getInfo(   @Path("name")  name:String ): Flowable<InfoGame>
+
+    @GET("/api/games")
+    fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String): Flowable<SearchModel>
+
 }

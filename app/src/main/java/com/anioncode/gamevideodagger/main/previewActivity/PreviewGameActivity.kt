@@ -1,6 +1,5 @@
 package com.anioncode.gamevideodagger.main.previewActivity
 
-import android.app.ProgressDialog
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.Color
@@ -16,7 +15,6 @@ import android.widget.MediaController
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -24,10 +22,8 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
 import com.anioncode.gamevideodagger.main.previewActivity.viewModel.SingleViewModel
-import com.anioncode.gamevideodagger.model.gamemodel.InfoGame
-import com.anioncode.gamevideodagger.model.ranked.Result
-import com.anioncode.gamevideodagger.model.ranked.TopGames
-import com.anioncode.gamevideodagger.viewmodels.VideoViewModel
+import com.anioncode.gamevideodagger.model.detailModel.InfoGame
+import com.anioncode.gamevideodagger.model.popularModel.Result
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.ScreenAdapter
 import com.anioncode.smogu.Adapter.TypeAdapter
@@ -35,7 +31,6 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import javax.inject.Inject
 

@@ -3,10 +3,9 @@ package com.anioncode.gamevideodagger.main.mainActivity.dagger
 import android.app.Application
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.widget.Toast
 import com.anioncode.gamevideodagger.main.mainActivity.MainActivity
 import com.anioncode.gamevideodagger.main.previewActivity.PreviewGameActivity
-import com.anioncode.gamevideodagger.model.ranked.Result
+import com.anioncode.gamevideodagger.model.popularModel.Result
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
 import com.google.gson.Gson

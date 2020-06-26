@@ -5,12 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anioncode.gamevideodagger.R
-import com.anioncode.gamevideodagger.model.ranked.Genre
-import com.anioncode.gamevideodagger.model.ranked.Result
-import com.anioncode.gamevideodagger.model.ranked.ShortScreenshot
-import com.squareup.picasso.Picasso
+import com.anioncode.gamevideodagger.model.popularModel.Genre
 import kotlinx.android.synthetic.main.item_ganger.view.*
-import kotlinx.android.synthetic.main.item_screen.view.*
 import kotlin.collections.ArrayList
 
 
@@ -49,14 +45,14 @@ class TypeAdapter() : RecyclerView.Adapter<TypeAdapter.ViewHolder>() {
 
     }
 
-    // Binds each animal in the ArrayList to a view
+    // Binds each item in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var model=items.get(position)
         holder.titleType.text=model.name
 
     }
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        // Holds the TextView that will add each video to
+        // Holds the TextView that will add each picture to
 
         val titleBack = view.titleBack
         val titleType = view.titleType

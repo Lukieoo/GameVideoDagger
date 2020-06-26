@@ -1,5 +1,6 @@
 package com.anioncode.gamevideodagger.main.homeFragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anioncode.gamevideodagger.R
-import com.anioncode.gamevideodagger.model.ranked.TopGames
-import com.anioncode.gamevideodagger.viewmodels.VideoViewModel
+import com.anioncode.gamevideodagger.model.popularModel.TopGames
+import com.anioncode.gamevideodagger.main.mainActivity.viewModel.VideoViewModel
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.LatestAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.date1
 import java.text.SimpleDateFormat
@@ -40,34 +40,8 @@ class HomeFragment : DaggerFragment() {
     ): View? {
 
         var view:View= inflater.inflate(R.layout.fragment_home, container, false)
-        //viewModel = ViewModelProviders.of(this, providerFactory).get(VideoViewModel::class.java)
-        viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
 
-//        With ViewModelFactory
-        val viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
-
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-        val getYear = SimpleDateFormat("yyyy")
-
-
-        println("${(getYear.format(Date()).toInt()-2)} rembrantttttttt")
-
-        view.date1.text="${(getYear.format(Date()).toInt()-2)}"
-        view.date2.text="${(getYear.format(Date()).toInt()-1)}"
-        view.date3.text="${getYear.format(Date())}"
-
-        viewModel.authenticateWithId("${(getYear.format(Date()).toString().toInt())}-01-01,${sdf.format(Date())}")
-        viewModel.authenticateWithString("${getYear.format(Date())}-01-01,${getYear.format(Date())}-12-31")
-
-        view.date1.setOnClickListener {
-            viewModel.authenticateWithId("${view.date1.text}-01-01,${view.date1.text}-12-31")
-        }
-        view.date2.setOnClickListener {
-            viewModel.authenticateWithId("${view.date2.text}-01-01,${view.date2.text}-12-31")
-        }
-        view.date3.setOnClickListener {
-            viewModel.authenticateWithId("${view.date3.text}-01-01,${sdf.format(Date())}")
-        }
+        initViewModel(view)
         initRecyclerView(view);
         initRecyclerView1(view);
         subscribeObservers()
@@ -75,8 +49,55 @@ class HomeFragment : DaggerFragment() {
         return view
     }
 
+    private fun initViewModel(view: View) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val getYear = SimpleDateFormat("yyyy")
+
+        view.date1.text = "${(getYear.format(Date()).toInt() - 2)}"
+        view.date2.text = "${(getYear.format(Date()).toInt() - 1)}"
+        view.date3.text = "${getYear.format(Date())}"
+
+
+
+        //        With ViewModelFactory
+        viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
+
+
+
+
+        viewModel.authenticateWithId(
+            "${(getYear.format(Date()).toString().toInt())}-01-01,${sdf.format(
+                Date()
+            )}"
+        )
+
+        viewModel.authenticateWithString("${getYear.format(Date())}-01-01,${getYear.format(Date())}-12-31")
+
+
+
+        view.date1.setOnClickListener {
+            viewModel.authenticateWithId("${view.date1.text}-01-01,${view.date1.text}-12-31")
+            view.date1.setBackgroundColor(Color.parseColor("#000000"))
+            view.date2.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            view.date3.setBackgroundColor(Color.parseColor("#FFFFFF"))
+        }
+        view.date2.setOnClickListener {
+            viewModel.authenticateWithId("${view.date2.text}-01-01,${view.date2.text}-12-31")
+            view.date1.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            view.date2.setBackgroundColor(Color.parseColor("#000000"))
+            view.date3.setBackgroundColor(Color.parseColor("#FFFFFF"))
+        }
+        view.date3.setOnClickListener {
+            viewModel.authenticateWithId("${view.date3.text}-01-01,${view.date3.text}-12-31")
+            view.date1.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            view.date2.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            view.date3.setBackgroundColor(Color.parseColor("#000000"))
+        }
+    }
+
     private fun subscribeObservers() {
-        viewModel.observeUser()!!.observe(activity!!, object : Observer<TopGames?> {
+
+        viewModel.observeGaneInfo()!!.observe(activity!!, object : Observer<TopGames?> {
             override fun onChanged(t: TopGames?) {
                 if (t != null) {
 
@@ -94,6 +115,7 @@ class HomeFragment : DaggerFragment() {
             }
         })
     }
+
     private fun initRecyclerView(view:View) {
         val layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)

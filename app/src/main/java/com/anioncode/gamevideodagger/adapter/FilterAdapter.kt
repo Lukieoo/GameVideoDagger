@@ -5,23 +5,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anioncode.gamevideodagger.R
-import com.anioncode.gamevideodagger.model.popularModel.Result
+import com.anioncode.gamevideodagger.model.popularModel.Genre
+import com.anioncode.gamevideodagger.model.searchModel.Result
+import com.anioncode.gamevideodagger.model.searchModel.SearchModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_popular.view.*
+import kotlinx.android.synthetic.main.item_game_filter.view.*
+import kotlinx.android.synthetic.main.item_screen.view.photoGame
 import kotlin.collections.ArrayList
 
 
-class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<TopAdapter.ViewHolder>() {
+class FilterAdapter(var itemClick:OnClickAdapterListner) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
 
     lateinit var items: ArrayList<Result>
-   // lateinit var  itemClick:OnClickAdapterListner
+    //lateinit var  itemClick:OnClickAdapterListner
 
 
     // Gets the number of games in the list
 
     interface  OnClickAdapterListner{
-        fun onClick( game:Result)
+        fun onClick( result:Result)
     }
     override fun getItemCount(): Int {
         if(::items.isInitialized){
@@ -42,33 +45,35 @@ class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<To
     // Inflates the item views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_popular, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_game_filter, parent, false))
 
     }
 
-    // Binds each item  in the ArrayList to a view
+    // Binds each item in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         var model=items.get(position)
         holder.title.text=model.name
-        holder.type.text="${model.rating}/${model.rating_top}"
+        holder.rateGameToolbar.text="${model.rating}/${model.rating_top}"
+        holder.desc.text=model.added.toString()
+
+        Picasso.get()
+            .load(model.background_image)
+            .resize(750,500)
+            .into( holder.photoGame);
+
         holder.itemView.setOnClickListener {
             itemClick.onClick(model)
         }
 
-        Picasso.get()
-            .load(model.background_image)
-//            .load("https://media.rawg.io/media/screenshots/8f2/8f244e48c17956579abc3efd0a663fd6.jpg")
-
-            .resize(750,500)
-
-            .into( holder.photoGame);
-
     }
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each picture to
-        val title = view.title
-        val type = view.type
+
         val photoGame = view.photoGame
+        val title = view.title
+        val rateGameToolbar = view.rateGameToolbar
+        val desc = view.desc
 
     }
 }
