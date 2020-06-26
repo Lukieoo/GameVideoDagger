@@ -55,11 +55,24 @@ class FilterAdapter(var itemClick:OnClickAdapterListner) : RecyclerView.Adapter<
         var model=items.get(position)
         holder.title.text=model.name
         holder.rateGameToolbar.text="${model.rating}/${model.rating_top}"
-        holder.desc.text=model.added.toString()
+
+        var platform:String=""
+
+        for (i in model.platforms) {
+
+            platform+=i.platform.name+", "
+        }
+
+        holder.desc.text=platform
+
+
+        holder.title.isSelected = true;
+        holder.desc.isSelected = true;
 
         Picasso.get()
             .load(model.background_image)
             .resize(750,500)
+                //Todo add error loading
             .into( holder.photoGame);
 
         holder.itemView.setOnClickListener {

@@ -33,6 +33,31 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+
+        android:layout_marginTop="5dp"
+        android:id="@+id/rateGameToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toLeftOf="@+id/starToolbar"
+        android:fontFamily="@font/productsansmedium"
+        android:text="9.4"
+
+        android:textColor="@color/coloryellow"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:id="@+id/starToolbar"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_star"
+        android:tint="@color/coloryellow" />
+
+
     <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
@@ -48,36 +73,14 @@
             android:textColor="@color/textcolorWhite"
             android:id="@+id/title"
             android:textSize="14sp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/productsansmedium"
-            android:layout_toLeftOf="@+id/rateGameToolbar"
+
             android:text="King war" />
 
-        <TextView
 
-            android:id="@+id/rateGameToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_toLeftOf="@+id/starToolbar"
-            android:fontFamily="@font/productsansmedium"
-            android:text="9.4"
-
-            android:textColor="@color/colorcomponnent"
-            android:textSize="12sp" />
-
-        <ImageView
-
-            android:id="@+id/starToolbar"
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_star"
-            android:tint="@color/colorcomponnent" />
 
         <TextView
 

@@ -15,7 +15,9 @@ import com.anioncode.gamevideodagger.model.searchModel.SearchModel
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.FilterAdapter
 import com.anioncode.smogu.Adapter.TopAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.bottomsheetdialog.view.*
 import kotlinx.android.synthetic.main.fragment_filter.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
@@ -37,23 +39,34 @@ class FilterFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var view:View= inflater.inflate(R.layout.fragment_filter, container, false)
-
-
+        var view: View = inflater.inflate(R.layout.fragment_filter, container, false)
 
         //        With ViewModelFactory
         viewModel = ViewModelProvider(this, providerFactory).get(FilterViewModel::class.java)
 
-        viewModel.getInfoAboutGame("5","Witcher")
+        viewModel.getInfoAboutGame("5", "Fornite")
 
         viewModel.observeSingle()!!.observe(activity!!,
             Observer<SearchModel?> { t ->
                 if (t != null) {
 
+
                     adapter.setPosts(t.results)
 
                 }
             })
+
+        view.filterOpen.setOnClickListener {
+            var botomSheetDialog:BottomSheetDialog= BottomSheetDialog(container!!.context).apply {
+                view=LayoutInflater.from(container!!.context).inflate(R.layout.bottomsheetdialog,view.dialogContainer)
+                setContentView(view)
+                show()
+            }
+        }
+
+        ///Todo change this
+        if (!::adapter.isInitialized) view.gameFind.visibility = View.VISIBLE
+        else view.gameFind.visibility = View.GONE
 
         val layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)

@@ -235,10 +235,21 @@
                     android:textColor="@color/textcolorWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:fontFamily="@font/productsanslight"
+                    android:id="@+id/platfroms"
+                    android:layout_below="@+id/description"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/textcolorGrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/text0"
-                    android:layout_below="@+id/description"
+                    android:layout_below="@+id/platfroms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsansmedium"

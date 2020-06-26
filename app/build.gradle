@@ -42,7 +42,7 @@ dependencies {
     //Style
     implementation 'com.chootdev:blurimg:1.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'com.airbnb.android:lottie:3.4.1'
 
     //implement Dagger the latest version (current)
 

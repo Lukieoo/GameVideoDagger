@@ -141,6 +141,15 @@ class PreviewGameActivity : BaseActivity() {
         titleGameToolbar.text = gameDataJSON.name
         rateGameToolbar.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
 
+        var platform:String=""
+
+        for (i in gameDataJSON.platforms) {
+
+            platform+=i.platform.name+", "
+        }
+
+        platfroms.text=platform
+
         text3.text = gameDataJSON.released
         titleGame.isSelected = true;
         titleGame.text = gameDataJSON.name
@@ -176,7 +185,9 @@ class PreviewGameActivity : BaseActivity() {
             clipGame.visibility = View.GONE
             text0.visibility=View.GONE
         }
-
+        if(gameDataJSON.short_screenshots.isEmpty()){
+            text.visibility=View.GONE
+        }
 
         viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
         viewModel.getInfoAboutGame(gameDataJSON.slug)
