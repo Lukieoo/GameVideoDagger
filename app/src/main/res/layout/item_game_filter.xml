@@ -68,7 +68,7 @@
 
         <TextView
             android:singleLine="true"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:layout_alignParentStart="true"
             android:textColor="@color/textcolorWhite"
             android:id="@+id/title"

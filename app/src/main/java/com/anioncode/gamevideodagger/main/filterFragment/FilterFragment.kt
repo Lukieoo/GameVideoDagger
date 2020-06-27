@@ -1,5 +1,6 @@
 package com.anioncode.gamevideodagger.main.filterFragment
 
+import android.animation.Animator
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -34,6 +35,7 @@ class FilterFragment : DaggerFragment() {
     @Inject
     lateinit var adapter: FilterAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +45,9 @@ class FilterFragment : DaggerFragment() {
         var view: View = inflater.inflate(R.layout.fragment_filter, container, false)
 
         //        With ViewModelFactory
+
+
+
         viewModel = ViewModelProvider(this, providerFactory).get(FilterViewModel::class.java)
 
 //        viewModel.getInfoAboutGame("20", "Fornite")
@@ -56,32 +61,23 @@ class FilterFragment : DaggerFragment() {
 
                 }
             })
-
+        view.av_from_code.setOnClickListener {
+            bottomSheetDialog(container, view)
+        }
+        view.av_from_code.playAnimation()
         view.filterOpen.setOnClickListener {
-            var botomSheetDialog:BottomSheetDialog=BottomSheetDialog(activity!!,R.style.SheetDialog)
-            var viewlayout:View=LayoutInflater.from(container!!.context).inflate(R.layout.bottomsheetdialog,view.dialogContainer)
-
-            viewlayout.findButton.setOnClickListener {
-                viewModel.getInfoAboutGame("20",   viewlayout.textInsert.text.toString())
-                botomSheetDialog.dismiss()
-            }
-
-//            viewlayout.numberpicker.maxValue=30
-//            viewlayout.numberpicker.minValue=1
-//
-//            viewlayout.numberpicker.setOnValueChangedListener { picker, oldVal, newVal ->
-//
-//            }
-
-            botomSheetDialog.setContentView(viewlayout)
-            botomSheetDialog.show()
-
+            bottomSheetDialog(container, view)
 
         }
 
         ///Todo change this
-        if (!::adapter.isInitialized) view.gameFind.visibility = View.VISIBLE
-        else view.gameFind.visibility = View.GONE
+        if (adapter.itemCount == 0) {
+            view.av_from_code.visibility = View.VISIBLE
+            view.gameFind.visibility = View.VISIBLE
+        } else {
+            view.av_from_code.visibility = View.GONE
+            view.gameFind.visibility = View.GONE
+        }
 
         val layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -89,6 +85,31 @@ class FilterFragment : DaggerFragment() {
         view.filter.adapter = adapter
 
         return view
+    }
+
+    private fun bottomSheetDialog(container: ViewGroup?, view: View) {
+        var botomSheetDialog: BottomSheetDialog =
+            BottomSheetDialog(activity!!, R.style.SheetDialog)
+        var viewlayout: View = LayoutInflater.from(container!!.context)
+            .inflate(R.layout.bottomsheetdialog, view.dialogContainer)
+
+        viewlayout.findButton.setOnClickListener {
+            viewModel.getInfoAboutGame("20", viewlayout.textInsert.text.toString())
+            botomSheetDialog.dismiss()
+
+            view.av_from_code.visibility = View.GONE
+            view.gameFind.visibility = View.GONE
+        }
+
+        //            viewlayout.numberpicker.maxValue=30
+        //            viewlayout.numberpicker.minValue=1
+        //
+        //            viewlayout.numberpicker.setOnValueChangedListener { picker, oldVal, newVal ->
+        //
+        //            }
+
+        botomSheetDialog.setContentView(viewlayout)
+        botomSheetDialog.show()
     }
 
 
