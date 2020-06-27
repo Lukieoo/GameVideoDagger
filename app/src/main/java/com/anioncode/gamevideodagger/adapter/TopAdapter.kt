@@ -50,7 +50,7 @@ class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<To
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var model=items.get(position)
         holder.title.text=model.name
-        holder.type.text="${model.rating}/${model.rating_top}"
+        holder.type.text="${model.rating}"
         holder.itemView.setOnClickListener {
             itemClick.onClick(model)
         }
@@ -59,8 +59,8 @@ class TopAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter<To
             .load(model.background_image)
 //            .load("https://media.rawg.io/media/screenshots/8f2/8f244e48c17956579abc3efd0a663fd6.jpg")
 
-            .resize(750,500)
-
+            .resize(900,500)
+            .centerCrop()
             .into( holder.photoGame);
 
     }

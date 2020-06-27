@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialogContainer"
-    android:background="@color/colorAccent"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/cornerdrawable"
+    android:gravity="center"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textinput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="tekst"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="20dp"
+        android:background="@color/maincolorapp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInsert"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_corner_toggle"
+            android:drawableStart="@drawable/ic_search"
+            android:fontFamily="@font/productsanslight"
+            android:hint="Find games by name"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--    <NumberPicker-->
+
+    <!--        android:theme="@style/AppTheme.Picker"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:layout_marginRight="5dp"-->
+    <!--        android:layout_below="@id/textinput"-->
+    <!--        android:id="@+id/numberpicker"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content" />-->
+    <Button
+        android:id="@+id/findButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textinput"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_corner_button"
+        android:fontFamily="@font/productsansmedium"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Find games"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+</RelativeLayout>

@@ -54,7 +54,7 @@ class FilterAdapter(var itemClick:OnClickAdapterListner) : RecyclerView.Adapter<
 
         var model=items.get(position)
         holder.title.text=model.name
-        holder.rateGameToolbar.text="${model.rating}/${model.rating_top}"
+        holder.rateGameToolbar.text="${model.rating}"
 
         var platform:String=""
 

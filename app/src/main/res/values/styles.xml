@@ -5,12 +5,13 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorcomponnent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/coloryellow</item>
     </style>
-    <style name="Widget.BottomNavigationView"
-        parent="Widget.Design.BottomNavigationView">
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/productsansmedium</item>
     </style>
+
     <style name="Theme.MyFancyTheme" parent="android:Theme.Holo">
         <item name="android:homeAsUpIndicator">@color/textcolorWhite</item>
         <item name="colorControlNormal">@color/textcolorWhite</item>
@@ -20,5 +21,34 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/textcolorWhite</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+<!--    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">-->
+<!--        <item name="bottomSheetStyle">@style/BottomSheetStyle-->
+<!--        </item>-->
+
+<!--    </style>-->
+
+<!--    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">-->
+<!--        <item name="android:background">@android:color/transparent</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorControlNormal"> @android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+    <style name="AppTheme.EditTextBaseStyle" parent="@android:style/TextAppearance">
+    </style>
+
+
+    <style name="SheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <!--<item name="android:windowCloseOnTouchOutside">false</item>-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackground">     @android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 </resources>

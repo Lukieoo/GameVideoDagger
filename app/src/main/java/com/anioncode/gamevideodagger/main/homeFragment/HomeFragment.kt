@@ -63,15 +63,19 @@ class HomeFragment : DaggerFragment() {
         viewModel = ViewModelProvider(this, providerFactory).get(VideoViewModel::class.java)
 
 
+        if (adapter.getItemCount()==0)
+        {
+
+            viewModel.authenticateWithId(
+                "${(getYear.format(Date()).toString().toInt())}-01-01,${sdf.format(
+                    Date()
+                )}"
+            )
+            viewModel.authenticateWithString("${getYear.format(Date())}-01-01,${getYear.format(Date())}-12-31")
+
+        }
 
 
-        viewModel.authenticateWithId(
-            "${(getYear.format(Date()).toString().toInt())}-01-01,${sdf.format(
-                Date()
-            )}"
-        )
-
-        viewModel.authenticateWithString("${getYear.format(Date())}-01-01,${getYear.format(Date())}-12-31")
 
 
 

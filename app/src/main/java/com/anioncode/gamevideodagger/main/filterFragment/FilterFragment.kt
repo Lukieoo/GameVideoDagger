@@ -1,5 +1,6 @@
 package com.anioncode.gamevideodagger.main.filterFragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,8 +45,8 @@ class FilterFragment : DaggerFragment() {
         //        With ViewModelFactory
         viewModel = ViewModelProvider(this, providerFactory).get(FilterViewModel::class.java)
 
-        viewModel.getInfoAboutGame("5", "Fornite")
-
+//        viewModel.getInfoAboutGame("20", "Fornite")
+//
         viewModel.observeSingle()!!.observe(activity!!,
             Observer<SearchModel?> { t ->
                 if (t != null) {
@@ -57,11 +58,25 @@ class FilterFragment : DaggerFragment() {
             })
 
         view.filterOpen.setOnClickListener {
-            var botomSheetDialog:BottomSheetDialog= BottomSheetDialog(container!!.context).apply {
-                view=LayoutInflater.from(container!!.context).inflate(R.layout.bottomsheetdialog,view.dialogContainer)
-                setContentView(view)
-                show()
+            var botomSheetDialog:BottomSheetDialog=BottomSheetDialog(activity!!,R.style.SheetDialog)
+            var viewlayout:View=LayoutInflater.from(container!!.context).inflate(R.layout.bottomsheetdialog,view.dialogContainer)
+
+            viewlayout.findButton.setOnClickListener {
+                viewModel.getInfoAboutGame("20",   viewlayout.textInsert.text.toString())
+                botomSheetDialog.dismiss()
             }
+
+//            viewlayout.numberpicker.maxValue=30
+//            viewlayout.numberpicker.minValue=1
+//
+//            viewlayout.numberpicker.setOnValueChangedListener { picker, oldVal, newVal ->
+//
+//            }
+
+            botomSheetDialog.setContentView(viewlayout)
+            botomSheetDialog.show()
+
+
         }
 
         ///Todo change this
