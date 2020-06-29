@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialogContainer"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="220dp"
     android:background="@drawable/cornerdrawable"
     android:gravity="center"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
@@ -43,11 +43,17 @@
     <!--        android:id="@+id/numberpicker"-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/textinput"
+        android:layout_margin="10dp"
+        android:id="@+id/genresRec"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
     <Button
         android:id="@+id/findButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textinput"
+        android:layout_below="@id/genresRec"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/round_corner_button"

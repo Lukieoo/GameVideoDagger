@@ -1,6 +1,7 @@
 package com.anioncode.gamevideodagger.network
 
 import com.anioncode.gamevideodagger.model.detailModel.InfoGame
+import com.anioncode.gamevideodagger.model.genresModel.genresModel
 import com.anioncode.gamevideodagger.model.popularModel.TopGames
 import com.anioncode.gamevideodagger.model.searchModel.SearchModel
 import io.reactivex.Flowable
@@ -21,5 +22,12 @@ interface AuthApi {
 
     @GET("/api/games")
     fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String): Flowable<SearchModel>
+
+    @GET("/api/games")
+    fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String,@Query("genres")  genres:String ): Flowable<SearchModel>
+
+
+    @GET("/api/genres")
+    fun getGenres( ): Flowable<genresModel>
 
 }
