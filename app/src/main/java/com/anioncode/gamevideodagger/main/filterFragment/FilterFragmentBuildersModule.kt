@@ -7,12 +7,16 @@ import com.anioncode.gamevideodagger.main.previewActivity.PreviewGameActivity
 import com.anioncode.gamevideodagger.model.genresModel.Result
 import com.anioncode.smogu.Adapter.FilterAdapter
 import com.anioncode.smogu.Adapter.GangerAdapter
-import com.anioncode.smogu.Adapter.ScreenAdapter
+import com.anioncode.smogu.Adapter.PlatformAdapter
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import java.util.*
 import javax.inject.Singleton
+import kotlin.Comparator
+import kotlin.collections.ArrayList
+
 
 @Module
 abstract class FilterFragmentBuildersModule {
@@ -27,13 +31,31 @@ abstract class FilterFragmentBuildersModule {
         @JvmStatic
         open fun provideAdapterGenres(application: Application): GangerAdapter {
             return GangerAdapter(itemClick = object : GangerAdapter.OnClickAdapterListner {
-                override fun onClick(model: Result) {
+                override fun onClick(model: Result, items: ArrayList<Result>) {
                     model.clicked = !model.clicked
+                    Collections.sort(items,
+                        Comparator<Result> { o1, o2 -> o2!!.clicked.compareTo(o1!!.clicked) })
                 }
 
             })
         }
+        @Singleton
+        @Provides
+        @JvmStatic
+        open fun provideAdapterPlatform(application: Application): PlatformAdapter {
+            return PlatformAdapter(itemClick = object : PlatformAdapter.OnClickAdapterListner {
+                override fun onClick(
+                    model: com.anioncode.gamevideodagger.model.plaformModel.Result,
+                    items: ArrayList<com.anioncode.gamevideodagger.model.plaformModel.Result>
+                ) {
+                    model.clicked = !model.clicked
+                    Collections.sort(items,
+                        Comparator<com.anioncode.gamevideodagger.model.plaformModel.Result?> { o1, o2 -> o2!!.clicked.compareTo(o1!!.clicked) })
+                }
 
+
+            })
+        }
         @Singleton
         @Provides
         @JvmStatic

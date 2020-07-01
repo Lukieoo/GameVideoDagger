@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogContainer"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/cornerdrawable"
+    android:gravity="center"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <Button
+        android:id="@+id/siteDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+      android:layout_toLeftOf="@id/page"
+        android:background="@drawable/round_corner_button"
+        android:fontFamily="@font/productsansmedium"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Down"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+    <TextView
+
+
+        android:id="@+id/page"
+        android:textSize="20sp"
+        android:text="0/200"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/productsansmedium"
+        android:textColor="@color/textcolorWhite"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_toRightOf="@id/page"
+        android:id="@+id/siteUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_corner_button"
+        android:fontFamily="@font/productsansmedium"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Up"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+</RelativeLayout>

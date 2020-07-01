@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialogContainer"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="280dp"
     android:background="@drawable/cornerdrawable"
     android:gravity="center"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
@@ -14,7 +14,7 @@
         android:id="@+id/textinput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@color/maincolorapp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -45,7 +45,19 @@
     <!--        android:layout_height="wrap_content" />-->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/textinput"
-        android:layout_margin="10dp"
+        android:id="@+id/platformRec"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_height="40dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/platformRec"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/genresRec"
         android:layout_width="match_parent"
         android:layout_height="40dp"/>

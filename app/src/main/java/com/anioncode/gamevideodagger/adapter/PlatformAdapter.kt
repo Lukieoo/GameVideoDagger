@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anioncode.gamevideodagger.R
-import com.anioncode.gamevideodagger.model.genresModel.Result
+import com.anioncode.gamevideodagger.model.plaformModel.Result
 import kotlinx.android.synthetic.main.item_ganger.view.*
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 
-class GangerAdapter(var  itemClick:OnClickAdapterListner) : RecyclerView.Adapter<GangerAdapter.ViewHolder>() {
+class PlatformAdapter(var  itemClick:OnClickAdapterListner) : RecyclerView.Adapter<PlatformAdapter.ViewHolder>() {
 
 
     lateinit var items: ArrayList<Result>
@@ -20,7 +23,7 @@ class GangerAdapter(var  itemClick:OnClickAdapterListner) : RecyclerView.Adapter
     // Gets the number of games in the list
 
     interface  OnClickAdapterListner{
-        fun onClick( game:Result, items: ArrayList<Result>)
+        fun onClick( game:Result,items: ArrayList<Result>)
     }
     override fun getItemCount(): Int {
         if(::items.isInitialized){
@@ -35,6 +38,8 @@ class GangerAdapter(var  itemClick:OnClickAdapterListner) : RecyclerView.Adapter
 
     fun setPosts(items: List<Result>) {
         this.items = items as ArrayList<Result>
+
+
         notifyDataSetChanged()
     }
     fun getPost():ArrayList<Result> {

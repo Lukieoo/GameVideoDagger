@@ -2,6 +2,7 @@ package com.anioncode.gamevideodagger.network
 
 import com.anioncode.gamevideodagger.model.detailModel.InfoGame
 import com.anioncode.gamevideodagger.model.genresModel.genresModel
+import com.anioncode.gamevideodagger.model.plaformModel.platformModel
 import com.anioncode.gamevideodagger.model.popularModel.TopGames
 import com.anioncode.gamevideodagger.model.searchModel.SearchModel
 import io.reactivex.Flowable
@@ -21,13 +22,21 @@ interface AuthApi {
     fun getInfo(   @Path("name")  name:String ): Flowable<InfoGame>
 
     @GET("/api/games")
-    fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String): Flowable<SearchModel>
+    fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String,@Query("page")  page:Int): Flowable<SearchModel>
 
     @GET("/api/games")
-    fun getSearchStatus(  @Query("page_size")  page_size:String,@Query("search")  search:String,@Query("genres")  genres:String ): Flowable<SearchModel>
+    fun getSearchStatus(@Query("page_size") page_size:String, @Query("search") search:String, @Query("genres") genres:String, @Query("page") page: Int?): Flowable<SearchModel>
 
+
+    @GET("/api/games")
+    fun getSearchStatuswithPlatform(@Query("page_size") page_size:String, @Query("search") search:String, @Query("genres") genres: String? = null, @Query("page") page: Int?, @Query("platforms") parent_platforms: String? = null): Flowable<SearchModel>
+
+    @GET("/api/games")
+    fun getSearchStatuswithPlatform2(@Query("page_size") page_size:String, @Query("search") search:String, @Query("page") page: Int?, @Query("platforms") parent_platforms: String? = null): Flowable<SearchModel>
 
     @GET("/api/genres")
     fun getGenres( ): Flowable<genresModel>
 
+    @GET("/api/platforms")
+    fun getPlatform( ): Flowable<platformModel>
 }
