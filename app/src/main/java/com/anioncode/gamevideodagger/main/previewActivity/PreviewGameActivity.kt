@@ -153,7 +153,7 @@ class PreviewGameActivity : BaseActivity() {
         text3.text = gameDataJSON.released
         titleGame.isSelected = true;
         titleGame.text = gameDataJSON.name
-        rateGame.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
+        rateGame.text = "${gameDataJSON.rating}"
         Picasso.get()
             .load(gameDataJSON.background_image)
             .into(back)
