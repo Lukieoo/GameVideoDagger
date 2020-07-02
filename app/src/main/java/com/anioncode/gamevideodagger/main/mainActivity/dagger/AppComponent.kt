@@ -1,6 +1,7 @@
 package com.anioncode.gamevideodagger.main.mainActivity.dagger
 
 import android.app.Application
+import com.anioncode.gamevideodagger.main.ConnectionFragment.ConnectionFragmentBuildersModule
 import com.anioncode.gamevideodagger.main.filterFragment.FilterFragmentBuildersModule
 import com.anioncode.gamevideodagger.main.homeFragment.MainFragmentBuildersModule
 import com.anioncode.gamevideodagger.main.mainActivity.DaggerApplication
@@ -24,7 +25,7 @@ import javax.inject.Singleton
         MainFragmentBuildersModule::class,
         PreviewGameActivityBuildersModule::class,
         FilterFragmentBuildersModule::class,
-
+        ConnectionFragmentBuildersModule::class,
         DataViewModelsModule::class,
         AuthModule::class
     ]

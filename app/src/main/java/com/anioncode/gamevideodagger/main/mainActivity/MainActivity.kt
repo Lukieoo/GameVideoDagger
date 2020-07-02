@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.anioncode.gamevideodagger.R
+import com.anioncode.gamevideodagger.Utiles.NetworkState
+import com.anioncode.gamevideodagger.main.ConnectionFragment.ConnectionFragment
 import com.anioncode.gamevideodagger.main.filterFragment.FilterFragment
 import com.anioncode.gamevideodagger.main.homeFragment.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,7 +14,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() ,
+class MainActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
 
 
@@ -23,8 +25,15 @@ class MainActivity : AppCompatActivity() ,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+        if (NetworkState.isNetworkAvailable(this@MainActivity)) {
 
+            supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+
+        }else{
+
+            supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
+
+        }
         bottom_navigation.setOnNavigationItemSelectedListener(this@MainActivity)
 
 
@@ -34,25 +43,38 @@ class MainActivity : AppCompatActivity() ,
 
         when (p0.itemId) {
             R.id.home -> {
-                print("deto1")
-                supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
-                return  true
+
+                if (NetworkState.isNetworkAvailable(this@MainActivity)) {
+                    supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment())
+                        .commit()
+                }else{
+
+                    supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
+
+                }
+                return true
             }
             R.id.dashboard -> {
-                print("deto2")
-                supportFragmentManager.beginTransaction().replace(R.id.myframe, FilterFragment()).commit()
+                if (NetworkState.isNetworkAvailable(this@MainActivity)) {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.myframe, FilterFragment())
+                        .commit()
+                }else{
+
+                    supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
+
+                }
                 return true
             }
             R.id.account -> {
-                print("deto3")
-                supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
-                return   true
+                //  supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+                return true
             }
             else -> { // Note the block
-                return   true
+                return true
             }
         }
-        return    true
+        return true
     }
 
 }
