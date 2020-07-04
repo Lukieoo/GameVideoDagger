@@ -25,15 +25,15 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (NetworkState.isNetworkAvailable(this@MainActivity)) {
+//        if (NetworkState.isNetworkAvailable(this@MainActivity)) {
 
             supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
 
-        }else{
-
-            supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
-
-        }
+//        }else{
+//
+//            supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
+//
+//        }
         bottom_navigation.setOnNavigationItemSelectedListener(this@MainActivity)
 
 

@@ -1,12 +1,12 @@
 package com.anioncode.gamevideodagger.main.mainActivity.viewModel
 
-import android.util.Log.i
 import androidx.lifecycle.*
+import com.anioncode.gamevideodagger.model.dataState.DataWithStates
 import com.anioncode.gamevideodagger.model.popularModel.TopGames
 import com.anioncode.gamevideodagger.network.AuthApi
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import kotlin.math.log
+
 
 class VideoViewModel : ViewModel {
 
@@ -23,18 +23,17 @@ class VideoViewModel : ViewModel {
 
 
     fun authenticateWithId(dates: String) {
-        val source: LiveData<TopGames> = LiveDataReactiveStreams.fromPublisher(
-            authApi.getTopGames(dates, "-added").doOnError { t-> print("$t  doOnError") }
+        val source: LiveData<DataWithStates<TopGames>> = LiveDataReactiveStreams.fromPublisher(
+            authApi.getTopGames(dates, "-added").map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        games.addSource<TopGames>(source, object : androidx.lifecycle.Observer<TopGames?> {
 
-            override fun onChanged(t: TopGames?) {
-                //   Log.d("TAG", "VideoonChanged: $t")
-                games.value = t
-                games.removeSource(source)
-            }
-        })
+        games.addSource<DataWithStates<TopGames>>(source
+        ) { t ->
+            //   Log.d("TAG", "VideoonChanged: $t")
+            games.value = t.data
+            games.removeSource(source)
+        }
     }
 
 
@@ -44,22 +43,17 @@ class VideoViewModel : ViewModel {
     }
 
     fun authenticateWithString(dates: String) {
-        var onError:Boolean=false
-        val source: LiveData<TopGames> = LiveDataReactiveStreams.fromPublisher(
-            authApi.getTopGames(dates, "-added").doOnError { t: Throwable ->  onError=true }
+
+        val source:  LiveData<DataWithStates<TopGames>> = LiveDataReactiveStreams.fromPublisher(
+            authApi.getTopGames(dates, "-added").map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        if (!onError) {
-            latestGames.addSource<TopGames>(
-                source,
-                object : androidx.lifecycle.Observer<TopGames?> {
 
-                    override fun onChanged(t: TopGames?) {
-                        //Log.d("TAG", "VideoonChanged: $t")
-                        latestGames.setValue(t)
-                        latestGames.removeSource(source)
-                    }
-                })
+        latestGames.addSource<DataWithStates<TopGames>>(source
+        ) { t ->
+            //   Log.d("TAG", "VideoonChanged: $t")
+            latestGames.value = t.data
+            latestGames.removeSource(source)
         }
     }
 

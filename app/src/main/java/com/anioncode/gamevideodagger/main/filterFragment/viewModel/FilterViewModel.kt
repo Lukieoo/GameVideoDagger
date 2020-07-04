@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.anioncode.gamevideodagger.model.dataState.DataWithStates
 import com.anioncode.gamevideodagger.model.genresModel.genresModel
 import com.anioncode.gamevideodagger.model.plaformModel.platformModel
 import com.anioncode.gamevideodagger.model.searchModel.SearchModel
@@ -25,27 +26,25 @@ class FilterViewModel : ViewModel {
     }
 
     fun getInfoAboutGame(page: String,search:String,page_number:Int) {
-        val source: LiveData<SearchModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getSearchStatus(page,search,page_number)
+        val source: LiveData<DataWithStates<SearchModel>> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getSearchStatus(page,search,page_number).map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gameInfo.addSource<SearchModel>(source, object : androidx.lifecycle.Observer<SearchModel?> {
-
-            override fun onChanged(t: SearchModel?) {
-             //   Log.d("TAG", "VideoonChanged: $t")
-                gameInfo.setValue(t)
-                gameInfo.removeSource(source)
-            }
-        })
+        gameInfo.addSource<DataWithStates<SearchModel>>(source
+        ) { t ->
+            //   Log.d("TAG", "VideoonChanged: $t")
+            gameInfo.value=t.data
+            gameInfo.removeSource(source)
+        }
     }
     fun getInfoAboutGame(page: String,search:String,genres:String,page_number:Int) {
-        val source: LiveData<SearchModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getSearchStatus(page,search,genres,page_number)
+        val source:  LiveData<DataWithStates<SearchModel>>  =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getSearchStatus(page,search,genres,page_number).map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gameInfo.addSource<SearchModel>(source
-        ) { t -> //   Log.d("TAG", "VideoonChanged: $t")
-            gameInfo.setValue(t)
+        gameInfo.addSource<DataWithStates<SearchModel>>(source
+        ) { t ->
+            gameInfo.value=t.data
             gameInfo.removeSource(source)
         }
     }
@@ -56,13 +55,13 @@ class FilterViewModel : ViewModel {
         page_number:Int,
         platform: String?
     ) {
-        val source: LiveData<SearchModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getSearchStatuswithPlatform(page,search,genres,page_number,platform)
+        val source: LiveData<DataWithStates<SearchModel>> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getSearchStatuswithPlatform(page,search,genres,page_number,platform).map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gameInfo.addSource<SearchModel>(source
+        gameInfo.addSource<DataWithStates<SearchModel>>(source
         ) { t -> //   Log.d("TAG", "VideoonChanged: $t")
-            gameInfo.setValue(t)
+            gameInfo.value=t.data
             gameInfo.removeSource(source)
         }
     }
@@ -72,13 +71,13 @@ class FilterViewModel : ViewModel {
         page_number:Int,
         platform: String?
     ) {
-        val source: LiveData<SearchModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getSearchStatuswithPlatform2(page,search,page_number,platform)
+        val source: LiveData<DataWithStates<SearchModel>> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getSearchStatuswithPlatform2(page,search,page_number,platform).map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gameInfo.addSource<SearchModel>(source
+        gameInfo.addSource<DataWithStates<SearchModel>>(source
         ) { t -> //   Log.d("TAG", "VideoonChanged: $t")
-            gameInfo.value = t
+            gameInfo.value = t.data
             gameInfo.removeSource(source)
         }
     }
@@ -87,18 +86,16 @@ class FilterViewModel : ViewModel {
     }
 
     fun getGenreGame() {
-        val source: LiveData<genresModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getGenres()
+        val source: LiveData<DataWithStates<genresModel>> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getGenres().map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gameGenre.addSource<genresModel>(source, object : androidx.lifecycle.Observer<genresModel?> {
-
-            override fun onChanged(t: genresModel?) {
-                //   Log.d("TAG", "VideoonChanged: $t")
-                gameGenre.setValue(t)
-                gameGenre.removeSource(source)
-            }
-        })
+        gameGenre.addSource<DataWithStates<genresModel>>(source
+        ) { t ->
+            //   Log.d("TAG", "VideoonChanged: $t")
+            gameGenre.value=t.data
+            gameGenre.removeSource(source)
+        }
     }
 
 
@@ -107,18 +104,16 @@ class FilterViewModel : ViewModel {
     }
 
     fun getPlatformGame() {
-        val source: LiveData<platformModel> =  LiveDataReactiveStreams.fromPublisher(
-            authApi.getPlatform()
+        val source: LiveData<DataWithStates<platformModel>> =  LiveDataReactiveStreams.fromPublisher(
+            authApi.getPlatform().map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
         )
-        gamePlatform.addSource<platformModel>(source, object : androidx.lifecycle.Observer<platformModel?> {
-
-            override fun onChanged(t: platformModel?) {
-                //   Log.d("TAG", "VideoonChanged: $t")
-                gamePlatform.setValue(t)
-                gamePlatform.removeSource(source)
-            }
-        })
+        gamePlatform.addSource<DataWithStates<platformModel>>(source
+        ) { t ->
+            //   Log.d("TAG", "VideoonChanged: $t")
+            gamePlatform.value=t.data
+            gamePlatform.removeSource(source)
+        }
     }
 
 
