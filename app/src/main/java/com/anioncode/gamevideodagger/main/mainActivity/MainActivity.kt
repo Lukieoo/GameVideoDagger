@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.Utiles.NetworkState
 import com.anioncode.gamevideodagger.main.ConnectionFragment.ConnectionFragment
+import com.anioncode.gamevideodagger.main.databaseFragment.DatabaseFragment
 import com.anioncode.gamevideodagger.main.filterFragment.FilterFragment
 import com.anioncode.gamevideodagger.main.homeFragment.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,15 +26,15 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        if (NetworkState.isNetworkAvailable(this@MainActivity)) {
+        if (NetworkState.isNetworkAvailable(this@MainActivity)) {
 
             supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
 
-//        }else{
-//
-//            supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
-//
-//        }
+        }else{
+
+            supportFragmentManager.beginTransaction().replace(R.id.myframe, ConnectionFragment()).commit()
+
+        }
         bottom_navigation.setOnNavigationItemSelectedListener(this@MainActivity)
 
 
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity(),
                 return true
             }
             R.id.account -> {
-                //  supportFragmentManager.beginTransaction().replace(R.id.myframe, HomeFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.myframe, DatabaseFragment()).commit()
                 return true
             }
             else -> { // Note the block

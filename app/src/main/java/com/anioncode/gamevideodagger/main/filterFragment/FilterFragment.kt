@@ -76,7 +76,7 @@ class FilterFragment : DaggerFragment() {
         viewModel.observeSingle()!!.observe(activity!!,
             Observer<SearchModel?> { t ->
                 if (t != null) {
-//TODO When you want more games in list
+
                     countNumber = t.count
 
                     if (countNumber % 25 == 0) {
@@ -150,9 +150,12 @@ class FilterFragment : DaggerFragment() {
                 if (!recyclerView.canScrollVertically(1)) {
 
                     if (!isEnd) {
+                        if (adapter.itemCount > 0) {
+                            isEnd = true
 
-                        isEnd = true
-                        bottomSheetDialogSite(container, view)
+
+                            bottomSheetDialogSite(container, view)
+                        }
                         //     Toast.makeText(ProductsActivity.this, "Last", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -229,8 +232,8 @@ class FilterFragment : DaggerFragment() {
 
         viewlayout.findButton.setOnClickListener {
 
-            geners=""
-            platform=""
+            geners = ""
+            platform = ""
 
             for (data in adapter1.getPost()) {
                 if (data.clicked) {
