@@ -22,6 +22,8 @@ import javax.inject.Singleton
 @Module
 abstract class VideoModule {
 
+
+
     //to powinienem dać do innej klasy...
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity //Must call how our main Activity

@@ -3,7 +3,7 @@ package com.anioncode.gamevideodagger.main.databaseFragment
 import android.app.Application
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import com.anioncode.gamevideodagger.main.databaseFragment.di.RoomModule
+//import com.anioncode.gamevideodagger.main.databaseFragment.di.RoomModule
 import com.anioncode.gamevideodagger.main.previewActivity.PreviewGameActivity
 import com.anioncode.gamevideodagger.model.genresModel.Result
 import com.anioncode.smogu.Adapter.FilterAdapter
@@ -22,9 +22,7 @@ import kotlin.collections.ArrayList
 @Module
 abstract class DatabaseFragmentBuildersModule {
 
-    @ContributesAndroidInjector(
-        modules = [RoomModule::class]
-    )
+    @ContributesAndroidInjector
     abstract fun contributeDatabaseFragment(): DatabaseFragment //Must call how our main Fragment{}
 
 
