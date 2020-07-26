@@ -50,5 +50,6 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun insert(word: Word) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(word)
+
     }
 }

@@ -32,14 +32,13 @@ import kotlinx.coroutines.launch
  */
 @Database(entities = [Word::class], version = 1)
 abstract class WordRoomDatabase : RoomDatabase() {
-
     abstract fun wordDao(): WordDao
-
     companion object {
         @Volatile
         private var INSTANCE: WordRoomDatabase? = null
 
         fun getDatabase(
+
                 context: Context,
                 scope: CoroutineScope
         ): WordRoomDatabase {
@@ -85,10 +84,11 @@ abstract class WordRoomDatabase : RoomDatabase() {
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
+
         fun populateDatabase(wordDao: WordDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
-            wordDao.deleteAll()
+          //  wordDao.deleteAll()
 
             var word = Word("Hello")
             wordDao.insert(word)
