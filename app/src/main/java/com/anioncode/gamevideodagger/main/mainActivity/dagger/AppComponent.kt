@@ -3,6 +3,7 @@ package com.anioncode.gamevideodagger.main.mainActivity.dagger
 import android.app.Application
 import com.anioncode.gamevideodagger.main.ConnectionFragment.ConnectionFragmentBuildersModule
 import com.anioncode.gamevideodagger.main.databaseFragment.DatabaseFragmentBuildersModule
+import com.anioncode.gamevideodagger.main.databaseFragment.zold.TvMazeDbModule
 //import com.anioncode.gamevideodagger.main.databaseFragment.data.ProductDao
 //import com.anioncode.gamevideodagger.main.databaseFragment.di.AppModule
 //import com.anioncode.gamevideodagger.main.databaseFragment.di.RoomModule
@@ -34,7 +35,7 @@ import javax.inject.Singleton
         ConnectionFragmentBuildersModule::class,
         DatabaseFragmentBuildersModule::class,
         DataViewModelsModule::class,
-//        RoomModule::class,
+        TvMazeDbModule::class,
       //  AppModule::class,
         AuthModule::class
     ]
