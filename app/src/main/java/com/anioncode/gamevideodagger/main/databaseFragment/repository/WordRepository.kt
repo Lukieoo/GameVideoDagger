@@ -19,12 +19,18 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordDao
 import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Abstracted Repository as promoted by the Architecture Guide.
  * https://developer.android.com/topic/libraries/architecture/guide.html
  */
-class WordRepository(private val wordDao: WordDao) {
+
+
+@Singleton
+class WordRepository@Inject
+constructor(private val wordDao: WordDao)  {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.

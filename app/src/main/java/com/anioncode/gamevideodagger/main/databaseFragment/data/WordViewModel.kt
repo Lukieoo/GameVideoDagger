@@ -19,30 +19,35 @@ package com.anioncode.gamevideodagger.main.databaseFragment.data
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
 import com.anioncode.gamevideodagger.main.databaseFragment.repository.WordRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * View Model to keep a reference to the word repository and
  * an up-to-date list of all words.
  */
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class WordViewModel @Inject constructor( var repository:WordRepository ) : ViewModel()   {
 
-    private val repository: WordRepository
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allWords: LiveData<List<Word>>
+      var allWords: LiveData<List<Word>>
+
 
     init {
-        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
-        repository = WordRepository(wordsDao)
-        allWords = repository.allWords
+//        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
+//        viewModelScope.launch(Dispatchers.IO) {
+          //  repository = WordRepository(wordsDao)
+            allWords = repository.allWords
+
+
     }
 
     /**

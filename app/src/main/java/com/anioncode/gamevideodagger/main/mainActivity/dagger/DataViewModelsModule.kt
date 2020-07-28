@@ -1,6 +1,7 @@
 package com.anioncode.gamevideodagger.main.mainActivity.dagger
 
 import androidx.lifecycle.ViewModel
+import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
 import com.anioncode.gamevideodagger.main.filterFragment.viewModel.FilterViewModel
 import com.anioncode.gamevideodagger.main.previewActivity.viewModel.SingleViewModel
 import com.anioncode.gamevideodagger.main.mainActivity.viewModel.VideoViewModel
@@ -26,4 +27,10 @@ abstract class DataViewModelsModule {
     @IntoMap
     @ViewModelKey(FilterViewModel::class)
     abstract fun bindFilterViewModel(viewModel: FilterViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WordViewModel::class)
+    abstract fun bindWordViewModel(viewModel: WordViewModel): ViewModel
 }

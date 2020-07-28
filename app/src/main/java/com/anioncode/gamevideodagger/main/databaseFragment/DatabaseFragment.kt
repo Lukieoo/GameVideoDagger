@@ -8,12 +8,18 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
 import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
+import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
+import com.anioncode.smogu.Adapter.RoomDbAdapter
+import com.anioncode.smogu.Adapter.TopAdapter
 //import com.anioncode.gamevideodagger.main.databaseFragment.data.Product
 //import com.anioncode.gamevideodagger.main.databaseFragment.repository.ProductRepository
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_database.view.*
 import javax.inject.Inject
 
 
@@ -22,8 +28,12 @@ class DatabaseFragment :DaggerFragment() {
 
     private lateinit var wordViewModel: WordViewModel
 
-//    @Inject
-//    var productRepository: ProductRepository? = null
+
+    @Inject
+    lateinit var providerFactory: ViewModelProviderFactory
+
+    @Inject
+    lateinit var adapterDb: RoomDbAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,17 +44,23 @@ class DatabaseFragment :DaggerFragment() {
             var view: View = inflater.inflate(R.layout.fragment_database, container, false)
 
 
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        wordViewModel = ViewModelProvider(this,providerFactory).get(WordViewModel::class.java)
 
         wordViewModel.allWords.observe(DatabaseFragment@this, Observer { words ->
             // Update the cached copy of the words in the adapter.
             words?.let {
                 println("$it it")
+                adapterDb.setPosts(it)
             }
         })
+//
+        wordViewModel.insert(Word("me2ko"))
 
-        wordViewModel.insert(Word("meko"));
-
+        view.myGamesRec.apply {
+            layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
+            adapter = adapterDb
+        }
 //        productRepository!!.findAll()
 //            .observe(viewLifecycleOwner,
 //                Observer<List<Product?>?> { products ->

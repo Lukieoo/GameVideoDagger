@@ -52,6 +52,8 @@ abstract class VideoModule {
 
             });
         }
+
+
         @Singleton
         @Provides
         @JvmStatic
