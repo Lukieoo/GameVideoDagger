@@ -6,5 +6,8 @@ Finished in 80%
 
 Soon in  Google Plasy store
 
+
+![Alt Text](https://media.giphy.com/media/MDyTSUaTpg78Q2xDM9/giphy.gif)
+<p></p>
 Api from
 <p>https://rawg.io/</p>
