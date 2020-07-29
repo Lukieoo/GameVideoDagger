@@ -4,7 +4,7 @@ Ui design , Room,
 
 Finished in 80% 
 
-Soon in  Google Plasy store
+Soon in  Google Play store
 
 
 ![Alt Text](https://media.giphy.com/media/W4XaKUshFWYGOI63Bj/giphy.gif)
