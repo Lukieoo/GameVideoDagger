@@ -31,5 +31,21 @@ import androidx.room.PrimaryKey
  * https://developer.android.com/topic/libraries/architecture/room.html
  */
 
-@Entity(tableName = "word_table")
-data class Word(@PrimaryKey @ColumnInfo(name = "word") val word: String)
+@Entity(tableName = "game_table")
+data class Game(
+
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: String,
+
+    @ColumnInfo(name = "title")
+    val title: String,
+
+    @ColumnInfo(name = "description")
+    val desc: String,
+
+    @ColumnInfo(name = "image")
+    val image: String
+
+
+)

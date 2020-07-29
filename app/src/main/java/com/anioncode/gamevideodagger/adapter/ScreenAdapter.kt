@@ -49,6 +49,7 @@ class ScreenAdapter() : RecyclerView.Adapter<ScreenAdapter.ViewHolder>() {
         Picasso.get()
             .load(model.image)
             .resize(850,650)
+            .centerCrop()
             .into( holder.photoGame)
 
 

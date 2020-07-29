@@ -1,9 +1,8 @@
 package com.anioncode.gamevideodagger.main.databaseFragment.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
-import com.anioncode.gamevideodagger.main.databaseFragment.data.WordDao
+import com.anioncode.gamevideodagger.main.databaseFragment.data.GameDao
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordRoomDatabase
 import com.anioncode.gamevideodagger.main.databaseFragment.repository.WordRepository
 import dagger.Module
@@ -30,15 +29,15 @@ object DbModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideShowDao(gameDatabase: WordRoomDatabase): WordDao {
+    fun provideShowDao(gameDatabase: WordRoomDatabase): GameDao {
         return gameDatabase.wordDao()
     }
 
     @JvmStatic
     @Singleton
     @Provides
-    fun provideWordRepository(wordDao: WordDao): WordRepository {
-        return WordRepository(wordDao)
+    fun provideWordRepository(gameDao: GameDao): WordRepository {
+        return WordRepository(gameDao)
     }
 
 }

@@ -16,23 +16,19 @@
 
 package com.anioncode.gamevideodagger.main.databaseFragment.data
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.room.TypeConverters
+import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Word::class], version = 1)
+@Database(entities = [Game::class], version = 4)
+//@TypeConverters(ImageBitmapString::class) // This will convert Bitmap to String and vice-versa;
 abstract class WordRoomDatabase : RoomDatabase() {
-    abstract fun wordDao(): WordDao
+    abstract fun wordDao(): GameDao
 
     companion object {
         const val DATABASE_NAME = "word_database.db"

@@ -15,11 +15,15 @@ import android.widget.MediaController
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.anioncode.gamevideodagger.R
+import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
+import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
+import com.anioncode.gamevideodagger.main.databaseFragment.repository.WordRepository
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
 import com.anioncode.gamevideodagger.main.previewActivity.viewModel.SingleViewModel
 import com.anioncode.gamevideodagger.model.detailModel.InfoGame
@@ -31,6 +35,8 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -55,6 +61,10 @@ class PreviewGameActivity : BaseActivity() {
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
 
+    var desc=""
+
+    private lateinit var wordViewModel: WordViewModel
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -78,7 +88,7 @@ class PreviewGameActivity : BaseActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            navIcon.setColorFilter(BlendModeColorFilter(Color.WHITE, BlendMode.SRC_ATOP));
+            navIcon.colorFilter = BlendModeColorFilter(Color.WHITE, BlendMode.SRC_ATOP);
         } else {
             navIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
         }
@@ -133,7 +143,9 @@ class PreviewGameActivity : BaseActivity() {
             }
         })
 
+
         cardstates.setBackgroundResource(R.drawable.cornerdrawable);
+
 
         setTitle("");
 
@@ -193,13 +205,25 @@ class PreviewGameActivity : BaseActivity() {
         viewModel.getInfoAboutGame(gameDataJSON.slug)
 
         subscribeObservers()
+
+
+        //Add data to database with room
+        wordViewModel = ViewModelProvider(this,providerFactory).get(WordViewModel::class.java)
+
+        btnNovaCompra.setOnClickListener {
+            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image))
+
+        }
+
     }
+
     private fun subscribeObservers() {
         viewModel.observeSingle()!!.observe(this, object : Observer<InfoGame?> {
             override fun onChanged(t: InfoGame?) {
                 if (t != null) {
 
                     description.text=t.description_raw
+                    desc=t.description_raw
 
 
                 }

@@ -73,7 +73,7 @@ class FilterAdapter(var itemClick:OnClickAdapterListner) : RecyclerView.Adapter<
             .load(model.background_image)
             .resize(750,500)
                 //Todo add error loading
-            .into( holder.photoGame);
+            .into( holder.photoGame)
 
         holder.itemView.setOnClickListener {
             itemClick.onClick(model)

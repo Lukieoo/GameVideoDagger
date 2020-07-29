@@ -17,8 +17,8 @@ package com.anioncode.gamevideodagger.main.databaseFragment.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.anioncode.gamevideodagger.main.databaseFragment.data.WordDao
-import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
+import com.anioncode.gamevideodagger.main.databaseFragment.data.GameDao
+import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,11 +30,11 @@ import javax.inject.Singleton
 
 @Singleton
 class WordRepository@Inject
-constructor(private val wordDao: WordDao)  {
+constructor(private val gameDao: GameDao)  {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allWords: LiveData<List<Word>> = wordDao.getAlphabetizedWords()
+    val allWords: LiveData<List<Game>> = gameDao.getAlphabetizedWords()
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -42,7 +42,12 @@ constructor(private val wordDao: WordDao)  {
     // thread, blocking the UI.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(word: Word) {
-        wordDao.insert(word)
+    suspend fun insert(game: Game) {
+        gameDao.insert(game)
+    }
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll() {
+        gameDao.deleteAll()
     }
 }

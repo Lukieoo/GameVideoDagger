@@ -52,7 +52,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/relative"
-        tools:listitem="@layout/item_list" />
+        tools:listitem="@layout/item_my_game" />
 
     <TextView
         android:id="@+id/text"

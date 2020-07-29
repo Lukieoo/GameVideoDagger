@@ -282,13 +282,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_below="@+id/text"
+                    android:layout_marginBottom="20dp"
                     android:paddingStart="40dp"
                     android:paddingEnd="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp" />
 
+                <Button
+                    android:elevation="4dp"
+                    android:textAllCaps="false"
+                    android:padding="10dp"
+                    android:background="@drawable/round_corner_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/viewPager"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/btnNovaCompra"
+                    android:layout_width="wrap_content"
+                    android:text="Save in my store "
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_store"
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
+
 
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

@@ -21,7 +21,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
+import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
 import com.anioncode.gamevideodagger.main.databaseFragment.repository.WordRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ class WordViewModel @Inject constructor( var repository:WordRepository ) : ViewM
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-      var allWords: LiveData<List<Word>>
+      var allWords: LiveData<List<Game>>
 
 
     init {
@@ -53,8 +53,12 @@ class WordViewModel @Inject constructor( var repository:WordRepository ) : ViewM
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(word: Word) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(word)
+    fun insert(game: Game) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(game)
 
     }
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteAll()
+    }
+
 }

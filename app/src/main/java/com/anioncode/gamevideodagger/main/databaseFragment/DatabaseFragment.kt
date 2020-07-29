@@ -1,21 +1,18 @@
 package com.anioncode.gamevideodagger.main.databaseFragment
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
-import com.anioncode.gamevideodagger.main.databaseFragment.entity.Word
+import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.RoomDbAdapter
-import com.anioncode.smogu.Adapter.TopAdapter
 //import com.anioncode.gamevideodagger.main.databaseFragment.data.Product
 //import com.anioncode.gamevideodagger.main.databaseFragment.repository.ProductRepository
 import dagger.android.support.DaggerFragment
@@ -54,7 +51,10 @@ class DatabaseFragment :DaggerFragment() {
             }
         })
 //
-        wordViewModel.insert(Word("me2ko"))
+
+
+
+       // wordViewModel.deleteAll()
 
         view.myGamesRec.apply {
             layoutManager =
