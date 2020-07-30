@@ -9,5 +9,6 @@
     <color name="coloryellow">#FEDC33</color>
     <color name="colorcomponnent">#ffffff</color>
     <color name="textcolorGrey">#53575F</color>
+    <color name="textColorDark">#3727210A</color>
     <color name="textcolorWhite">#ffffff</color>
 </resources>

@@ -25,7 +25,7 @@ import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Game::class], version = 4)
+@Database(entities = [Game::class], version = 5)
 //@TypeConverters(ImageBitmapString::class) // This will convert Bitmap to String and vice-versa;
 abstract class WordRoomDatabase : RoomDatabase() {
     abstract fun wordDao(): GameDao

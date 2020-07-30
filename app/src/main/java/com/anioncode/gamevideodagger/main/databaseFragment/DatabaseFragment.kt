@@ -12,6 +12,7 @@ import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
 import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
+import com.anioncode.smogu.Adapter.RoomBuyAdapter
 import com.anioncode.smogu.Adapter.RoomDbAdapter
 //import com.anioncode.gamevideodagger.main.databaseFragment.data.Product
 //import com.anioncode.gamevideodagger.main.databaseFragment.repository.ProductRepository
@@ -31,6 +32,8 @@ class DatabaseFragment :DaggerFragment() {
 
     @Inject
     lateinit var adapterDb: RoomDbAdapter
+    @Inject
+    lateinit var  roomBuyAdapter: RoomBuyAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -48,6 +51,15 @@ class DatabaseFragment :DaggerFragment() {
             words?.let {
                 println("$it it")
                 adapterDb.setPosts(it)
+
+            }
+        })
+        wordViewModel.allBuy.observe(DatabaseFragment@this, Observer { words ->
+            // Update the cached copy of the words in the adapter.
+            words?.let {
+                println("$it it")
+                roomBuyAdapter.setPosts(it)
+
             }
         })
 //
@@ -60,6 +72,12 @@ class DatabaseFragment :DaggerFragment() {
             layoutManager =
                 LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
             adapter = adapterDb
+        }
+
+        view.recyclerView1.apply {
+            layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
+            adapter = roomBuyAdapter
         }
 //        productRepository!!.findAll()
 //            .observe(viewLifecycleOwner,

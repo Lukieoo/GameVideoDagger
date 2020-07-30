@@ -51,19 +51,32 @@ class RoomDbAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter
         holder.title.text=model.title
         holder.desc.text=model.desc
 
-
         Picasso.get()
             .load(model.image)
             .resize(750,500)
             .centerCrop()
-            .into( holder.photoGame);
+            .into( holder.photoGame)
 
+        holder.deleteThis.setOnClickListener {
+            itemClick.onClick(model)
+            holder.swipeLayout.close(true)
+        }
+
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each picture to
         val title   = view.titleType
         val desc   = view.desc
         val photoGame   = view.photoGame
+        val deleteThis   = view.deleteThis
+        val swipeLayout   = view.swipeLayout
 
     }
 }

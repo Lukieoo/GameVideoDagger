@@ -32,6 +32,7 @@ import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.ScreenAdapter
 import com.anioncode.smogu.Adapter.TypeAdapter
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
@@ -210,11 +211,27 @@ class PreviewGameActivity : BaseActivity() {
         //Add data to database with room
         wordViewModel = ViewModelProvider(this,providerFactory).get(WordViewModel::class.java)
 
+//        if( (gameDataJSON.id.toString())!=null){}
+       // wordViewModel.viewModelScope.launch(Dispatchers.IO){
+
+        wordViewModel.findID(gameDataJSON.id.toString()).observe(this, Observer {
+            if(it.isNotEmpty()){
+                Linear.visibility=View.INVISIBLE
+            }
+        })
+
         btnNovaCompra.setOnClickListener {
-            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image))
+            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image,"store"))
 
+            Snackbar.make(window.decorView.findViewById(android.R.id.content), "Successfully added to your library", Snackbar.LENGTH_LONG)
+                .show()
         }
+        btnNovaCompraBuy.setOnClickListener {
+            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image,"buy"))
 
+            Snackbar.make(window.decorView.findViewById(android.R.id.content), "Successfully added to your store", Snackbar.LENGTH_LONG)
+                .show()
+        }
     }
 
     private fun subscribeObservers() {

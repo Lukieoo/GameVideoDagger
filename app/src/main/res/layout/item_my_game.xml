@@ -1,107 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:card_view="http://schemas.android.com/tools"
-        android:id="@+id/cardstates"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="3dp"
-        android:orientation="vertical"
-        android:padding="3dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="25dp"
-        card_view:cardBackgroundColor="@android:color/transparent">
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/photoGame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/tmp" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-
-        android:visibility="invisible"
-        android:layout_marginTop="5dp"
-        android:id="@+id/rateGameToolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_toLeftOf="@+id/starToolbar"
-        android:fontFamily="@font/productsansmedium"
-        android:text="9.4"
-
-        android:textColor="@color/coloryellow"
-        android:textSize="12sp" />
-
-    <ImageView
-        android:layout_marginTop="5dp"
-        android:id="@+id/starToolbar"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/ic_store"
-        android:tint="@color/coloryellow" />
-
-
+    android:layout_height="match_parent"
+    android:id="@+id/swipeLayout"
+    app:mode="same_level"
+    app:dragEdge="right">
     <RelativeLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/cardstates">
-
-        <TextView
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:layout_alignParentStart="true"
-            android:textColor="@color/textcolorWhite"
-            android:id="@+id/titleType"
-            android:textSize="14sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/productsansmedium"
-
-            android:text="King war" />
-
-
-
-        <TextView
-
-            android:textColor="@color/textcolorGrey"
-            android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="116dp">
+        <ImageView
+            android:id="@+id/deleteThis"
+            android:tint="#FF1744"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_delete_sweep"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleType"
-            android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/productsanslight"
-            android:maxLines="2"
-            android:text="This is a roayl war with you as the coe.Come and be king " />
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
-    <View
-        android:id="@+id/line"
-        android:background="@color/textcolorGrey"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/cardstates"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.4dp"/>
-</RelativeLayout>
+        android:layout_height="wrap_content">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardstates"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="3dp"
+            android:orientation="vertical"
+            android:padding="3dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="25dp"
+            card_view:cardBackgroundColor="@android:color/transparent">
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/photoGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tmp" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+
+            android:id="@+id/rateGameToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/starToolbar"
+
+            android:fontFamily="@font/productsansmedium"
+            android:text="9.4"
+            android:textColor="@color/coloryellow"
+
+            android:textSize="12sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/starToolbar"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_store"
+            android:tint="@color/coloryellow" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/cardstates"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/titleType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/productsansmedium"
+                android:singleLine="true"
+                android:text="King war"
+                android:textColor="@color/textcolorWhite"
+
+                android:textSize="14sp" />
+
+
+            <TextView
+
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleType"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/productsanslight"
+                android:maxLines="2"
+                android:text="This is a roayl war with you as the coe.Come and be king "
+                android:textColor="@color/textcolorGrey" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:layout_below="@id/cardstates"
+            android:layout_marginTop="10dp"
+            android:background="@color/textcolorGrey" />
+    </RelativeLayout>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

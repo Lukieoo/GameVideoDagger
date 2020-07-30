@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+android:id="@+id/swipe"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    app:mode="same_level"
+
+    app:dragEdge="bottom">
+    <RelativeLayout
+
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:tint="#FF1744"
+                android:adjustViewBounds="true"
+                android:id="@+id/deleteThis"
+                android:src="@drawable/ic_delete_sweep"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"/>
+            <View
+                android:background="@color/textcolorWhite"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:tint="@color/coloryellow"
+                android:adjustViewBounds="true"
+                android:id="@+id/store"
+                android:src="@drawable/ic_store"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardstates"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="25dp"
+    android:layout_margin="3dp"
+    android:padding="3dp"
+    android:orientation="vertical"
+    android:layout_width="100dp"
+    android:layout_height="100dp">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/photoGame"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tmp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

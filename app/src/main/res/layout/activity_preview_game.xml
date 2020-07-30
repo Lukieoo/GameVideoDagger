@@ -289,22 +289,53 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp" />
 
-                <Button
-                    android:elevation="4dp"
-                    android:textAllCaps="false"
+                <LinearLayout
                     android:padding="10dp"
-                    android:background="@drawable/round_corner_button"
-                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Linear"
                     android:layout_below="@+id/viewPager"
-                    android:layout_marginBottom="20dp"
-                    android:id="@+id/btnNovaCompra"
-                    android:layout_width="wrap_content"
-                    android:text="Save in my store "
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawableRight="@drawable/ic_store"
-                    android:layout_height="wrap_content"/>
+                    android:gravity="center|center_horizontal"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+
+                        android:elevation="4dp"
+                        android:textAllCaps="false"
+                        android:padding="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_centerHorizontal="true"
+
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/btnNovaCompra"
+                        android:layout_width="wrap_content"
+                        android:text="Save in my store "
+                        android:gravity="center"
+                        android:textColor="@color/textcolorWhite"
+                        android:drawableTint="@color/textcolorWhite"
+                        android:drawableRight="@drawable/ic_store"
+                        android:layout_height="match_parent"/>
+                    <View
+                        android:background="@color/textcolorWhite"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:elevation="4dp"
+                        android:textAllCaps="false"
+                        android:padding="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_centerHorizontal="true"
+
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/btnNovaCompraBuy"
+                        android:layout_width="wrap_content"
+                        android:text="I want buy "
+                        android:gravity="center"
+                        android:textColor="@color/textcolorWhite"
+                        android:drawableTint="@color/textcolorWhite"
+                        android:drawableRight="@drawable/ic_shopping"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
             </RelativeLayout>
 
 

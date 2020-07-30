@@ -38,17 +38,8 @@ class WordViewModel @Inject constructor( var repository:WordRepository ) : ViewM
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-      var allWords: LiveData<List<Game>>
-
-
-    init {
-//        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
-//        viewModelScope.launch(Dispatchers.IO) {
-          //  repository = WordRepository(wordsDao)
-            allWords = repository.allWords
-
-
-    }
+      var allWords: LiveData<List<Game>> = repository.allWords
+      var allBuy: LiveData<List<Game>> = repository.allBuy
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
@@ -57,8 +48,11 @@ class WordViewModel @Inject constructor( var repository:WordRepository ) : ViewM
         repository.insert(game)
 
     }
+
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
     }
-
+      fun findID(id:String): LiveData<List<Game>> {
+          return repository.findID(id)
+    }
 }

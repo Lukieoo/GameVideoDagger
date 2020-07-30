@@ -45,7 +45,10 @@ data class Game(
     val desc: String,
 
     @ColumnInfo(name = "image")
-    val image: String
+    val image: String,
 
+    //Store //Buy
+    @ColumnInfo(name = "status")
+    val status: String
 
 )

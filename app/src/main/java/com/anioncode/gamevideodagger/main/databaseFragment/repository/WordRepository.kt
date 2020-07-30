@@ -34,7 +34,8 @@ constructor(private val gameDao: GameDao)  {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allWords: LiveData<List<Game>> = gameDao.getAlphabetizedWords()
+    val allWords: LiveData<List<Game>> = gameDao.getMyGame()
+    val allBuy: LiveData<List<Game>> = gameDao.getBuy()
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -49,5 +50,20 @@ constructor(private val gameDao: GameDao)  {
     @WorkerThread
     suspend fun deleteAll() {
         gameDao.deleteAll()
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteID(id:String) {
+        gameDao.deleteID(id)
+    }
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateID(id:String,update:String) {
+        gameDao.updateID(id,update)
+    }
+
+    fun findID( id:String) : LiveData<List<Game>> {
+        return  gameDao.findID(id)
     }
 }

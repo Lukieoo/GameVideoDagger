@@ -40,12 +40,26 @@ interface GameDao {
     // data has changed. Since we are getting all the contents of the database,
     // we are notified whenever any of the database contents have changed.
 
-    @Query("SELECT * from game_table ORDER BY title ASC")
-    fun getAlphabetizedWords(): LiveData<List<Game>>
+    @Query("SELECT * from game_table  WHERE status='store'  ORDER BY title ASC ")
+    fun getMyGame(): LiveData<List<Game>>
+
+
+    @Query("SELECT * from game_table  WHERE status='buy'  ORDER BY title ASC ")
+    fun getBuy(): LiveData<List<Game>>
+
+    @Query("SELECT * FROM game_table WHERE id=:id ")
+    fun findID(id: String): LiveData<List<Game>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(game: Game)
 
     @Query("DELETE FROM game_table")
     fun deleteAll()
+
+    @Query("DELETE FROM game_table WHERE id=:id")
+    fun deleteID(id: String)
+
+    @Query("UPDATE game_table SET status = :update WHERE id =:id")
+
+    fun updateID(id: String,update:String)
 }
