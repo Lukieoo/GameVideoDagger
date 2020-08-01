@@ -1,5 +1,8 @@
 package com.anioncode.gamevideodagger.model.detailModel
 
+import com.anioncode.gamevideodagger.model.popularModel.Clip
+import com.anioncode.gamevideodagger.model.popularModel.Genre
+
 data class InfoGame(
     val achievements_count: Int,
     val added: Int,

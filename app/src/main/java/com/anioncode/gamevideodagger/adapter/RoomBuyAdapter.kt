@@ -30,6 +30,7 @@ class RoomBuyAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapte
     interface OnClickAdapterListner {
         fun onClick(game: Game)
         fun onStore(game: Game)
+        fun onDelete(game: Game)
     }
 
     fun setPosts(items: List<Game>) {
@@ -54,8 +55,11 @@ class RoomBuyAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var model = items.get(position)
         holder.delete.setOnClickListener {
-            itemClick.onClick(model)
+            itemClick.onDelete(model)
             holder.swipe.close(true)
+        }
+        holder.cardstates.setOnClickListener {
+            itemClick.onClick(model)
         }
         holder.store.setOnClickListener {
             itemClick.onStore(model)
@@ -75,6 +79,7 @@ class RoomBuyAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapte
         val delete = view.deleteThis
         val store = view.store
         val swipe = view.swipe
+        val cardstates = view.cardstates
 
     }
 }

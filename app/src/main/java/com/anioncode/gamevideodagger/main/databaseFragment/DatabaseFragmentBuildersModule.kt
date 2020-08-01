@@ -36,18 +36,18 @@ abstract class DatabaseFragmentBuildersModule {
             return RoomDbAdapter(itemClick = object : RoomDbAdapter.OnClickAdapterListner {
                 override fun onClick(game: Game) {
                     println("WasClick")
-//                    var intent = Intent(
-//                        application.applicationContext,
-//                        PreviewGameActivity::class.java
-//                    ).apply {
-////                        putExtra("GameListBackround", game.background_image)
-////                        putExtra("GameListColor", game.dominant_color)
-//
-//                        putExtra("GameData", Gson().toJson(game))
-//
-//                    }
-//                    intent.flags = FLAG_ACTIVITY_NEW_TASK
-//                    application.applicationContext.startActivity(intent)
+                    var intent = Intent(
+                        application.applicationContext,
+                        PreviewGameActivity::class.java
+                    ).apply {
+//                        putExtra("GameListBackround", game.background_image)
+//                        putExtra("GameListColor", game.dominant_color)
+
+                        putExtra("id", Gson().toJson(game))
+
+                    }
+                    intent.flags = FLAG_ACTIVITY_NEW_TASK
+                    application.applicationContext.startActivity(intent)
                 }
 
                 override fun onDelete(game: Game) {
@@ -65,6 +65,21 @@ abstract class DatabaseFragmentBuildersModule {
             return RoomBuyAdapter(itemClick = object : RoomBuyAdapter.OnClickAdapterListner {
 
                 override fun onClick(game: Game) {
+                    println("WasClick")
+                    var intent = Intent(
+                        application.applicationContext,
+                        PreviewGameActivity::class.java
+                    ).apply {
+                        //                        putExtra("GameListBackround", game.background_image)
+//                        putExtra("GameListColor", game.dominant_color)
+
+                        putExtra("id", Gson().toJson(game))
+
+                    }
+                    intent.flags = FLAG_ACTIVITY_NEW_TASK
+                    application.applicationContext.startActivity(intent)
+                }
+                override fun onDelete(game: Game) {
 
                     GlobalScope.launch {
                         repository.deleteID(game.id)

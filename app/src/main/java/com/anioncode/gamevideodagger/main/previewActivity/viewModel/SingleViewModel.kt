@@ -15,6 +15,7 @@ class SingleViewModel : ViewModel {
     private val authApi: AuthApi
 
     private val gameInfo: MediatorLiveData<InfoGame> = MediatorLiveData<InfoGame>()
+    private val gameGame: MediatorLiveData<InfoGame> = MediatorLiveData<InfoGame>()
 
     @Inject constructor( authApis: AuthApi) {
 
@@ -24,10 +25,14 @@ class SingleViewModel : ViewModel {
 
     fun getInfoAboutGame(dates: String) {
         val source: LiveData<DataWithStates<InfoGame>> =  LiveDataReactiveStreams.fromPublisher(
+
             authApi.getInfo(dates).map { lstUser -> DataWithStates(lstUser) }.onErrorReturn { ex -> DataWithStates(states = ex) }
                 .subscribeOn(Schedulers.io())
+
         )
+
         gameInfo.addSource<DataWithStates<InfoGame>>(source
+
         ) { t ->
             //   Log.d("TAG", "VideoonChanged: $t")
             gameInfo.value=t.data

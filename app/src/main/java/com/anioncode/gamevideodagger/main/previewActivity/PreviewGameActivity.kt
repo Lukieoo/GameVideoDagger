@@ -15,7 +15,6 @@ import android.widget.MediaController
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -23,10 +22,10 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.anioncode.gamevideodagger.R
 import com.anioncode.gamevideodagger.main.databaseFragment.data.WordViewModel
 import com.anioncode.gamevideodagger.main.databaseFragment.entity.Game
-import com.anioncode.gamevideodagger.main.databaseFragment.repository.WordRepository
 import com.anioncode.gamevideodagger.main.previewActivity.util.AppBarStateChangeListener
 import com.anioncode.gamevideodagger.main.previewActivity.viewModel.SingleViewModel
 import com.anioncode.gamevideodagger.model.detailModel.InfoGame
+import com.anioncode.gamevideodagger.model.popularModel.PlatformX
 import com.anioncode.gamevideodagger.model.popularModel.Result
 import com.anioncode.gamevideodagger.viewmodels.ViewModelProviderFactory
 import com.anioncode.smogu.Adapter.ScreenAdapter
@@ -36,8 +35,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_preview_game.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -53,16 +50,18 @@ class PreviewGameActivity : BaseActivity() {
     lateinit var adapter2: TypeAdapter
 
     lateinit var gameData: String
+    lateinit var gameID: String
 
     lateinit var gson: Gson
     lateinit var gameDataJSON: Result
+    lateinit var gameDataSmall: Game
 
     lateinit var viewModel: SingleViewModel
 
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
 
-    var desc=""
+    var desc = ""
 
     private lateinit var wordViewModel: WordViewModel
 
@@ -78,13 +77,39 @@ class PreviewGameActivity : BaseActivity() {
         val navIcon: Drawable = toolbar.getNavigationIcon()!!
 
         gameData = intent.extras!!.getString("GameData").toString()
+        gameID = intent.extras!!.getString("id").toString()
 
 
         gson = Gson()
-        gameDataJSON = gson?.fromJson(gameData, Result::class.java)
 
+
+
+        if (gameData.length > 5) {
+
+
+            gameDataJSON = gson?.fromJson(gameData, Result::class.java)
+
+            viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
+            viewModel.getInfoAboutGame(gameDataJSON.slug!!)
+
+            subscribeObservers()
+
+            InitViewPreview(navIcon)
+        } else {
+
+            text.visibility =View.GONE
+            gameDataSmall = gson?.fromJson(gameID, Game::class.java)
+            viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
+            viewModel.getInfoAboutGame(gameDataSmall.id)
+
+            subscribeObservers(navIcon)
+        }
+    }
+
+    private fun InitViewPreview(navIcon: Drawable) {
         initRecyclerView()
         initViewPager();
+
         toolbar.setNavigationOnClickListener {
             finish()
         }
@@ -109,7 +134,7 @@ class PreviewGameActivity : BaseActivity() {
 
                 if (state!!.name.equals("COLLAPSED")) {
 
-//                    colapsing!!.title=gameDataJSON.name
+                    //                    colapsing!!.title=gameDataJSON.name
 
                     titleGameToolbar.visibility = View.VISIBLE
                     rateGameToolbar.visibility = View.VISIBLE
@@ -155,14 +180,17 @@ class PreviewGameActivity : BaseActivity() {
         titleGameToolbar.text = gameDataJSON.name
         rateGameToolbar.text = "${gameDataJSON.rating}/${gameDataJSON.rating_top}"
 
-        var platform:String=""
+        var platform: String = ""
 
-        for (i in gameDataJSON.platforms) {
+        if (gameDataJSON.platforms != null) {
+            for (i in gameDataJSON.platforms!!) {
 
-            platform+=i.platform.name+", "
+                platform += i.platform.name + ", "
+            }
+        } else {
+            platfroms.visibility=View.GONE
         }
-
-        platfroms.text=platform
+        platfroms.text = platform
 
         text3.text = gameDataJSON.released
         titleGame.isSelected = true;
@@ -173,7 +201,7 @@ class PreviewGameActivity : BaseActivity() {
             .into(back)
 
         if (gameDataJSON.clip != null) {
-            val uri: Uri = Uri.parse(gameDataJSON.clip.clip)
+            val uri: Uri = Uri.parse(gameDataJSON.clip!!.clip)
 
 
 
@@ -197,40 +225,66 @@ class PreviewGameActivity : BaseActivity() {
 
         } else {
             clipGame.visibility = View.GONE
-            text0.visibility=View.GONE
+            text0.visibility = View.GONE
         }
-        if(gameDataJSON.short_screenshots.isEmpty()){
-            text.visibility=View.GONE
-        }
+        if (gameDataJSON.short_screenshots != null)
+            if (gameDataJSON.short_screenshots!!.isEmpty()) {
+                text.visibility = View.GONE
+            }
 
-        viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
-        viewModel.getInfoAboutGame(gameDataJSON.slug)
-
-        subscribeObservers()
+        //lastViewModel
+//        viewModel = ViewModelProvider(this, providerFactory).get(SingleViewModel::class.java)
+//        viewModel.getInfoAboutGame(gameDataJSON.slug)
+//
+//        subscribeObservers()
 
 
         //Add data to database with room
-        wordViewModel = ViewModelProvider(this,providerFactory).get(WordViewModel::class.java)
+        wordViewModel = ViewModelProvider(this, providerFactory).get(WordViewModel::class.java)
 
-//        if( (gameDataJSON.id.toString())!=null){}
-       // wordViewModel.viewModelScope.launch(Dispatchers.IO){
+        //        if( (gameDataJSON.id.toString())!=null){}
+        // wordViewModel.viewModelScope.launch(Dispatchers.IO){
 
         wordViewModel.findID(gameDataJSON.id.toString()).observe(this, Observer {
-            if(it.isNotEmpty()){
-                Linear.visibility=View.INVISIBLE
+            if (it.isNotEmpty()) {
+                Linear.visibility = View.INVISIBLE
             }
         })
 
         btnNovaCompra.setOnClickListener {
-            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image,"store"))
+            wordViewModel.insert(
+                Game(
+                    gameDataJSON.id.toString(),
+                    gameDataJSON.name,
+                    desc,
+                    gameDataJSON.background_image,
+                    "store"
+                )
+            )
 
-            Snackbar.make(window.decorView.findViewById(android.R.id.content), "Successfully added to your library", Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                window.decorView.findViewById(android.R.id.content),
+                "Successfully added to your library",
+                Snackbar.LENGTH_LONG
+            )
                 .show()
         }
         btnNovaCompraBuy.setOnClickListener {
-            wordViewModel.insert(Game(gameDataJSON.id.toString(),gameDataJSON.name,desc,gameDataJSON.background_image,"buy"))
+            wordViewModel.insert(
+                Game(
+                    gameDataJSON.id.toString(),
+                    gameDataJSON.name,
+                    desc,
+                    gameDataJSON.background_image,
+                    "buy"
+                )
+            )
 
-            Snackbar.make(window.decorView.findViewById(android.R.id.content), "Successfully added to your store", Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                window.decorView.findViewById(android.R.id.content),
+                "Successfully added to your store",
+                Snackbar.LENGTH_LONG
+            )
                 .show()
         }
     }
@@ -240,17 +294,64 @@ class PreviewGameActivity : BaseActivity() {
             Observer<InfoGame?> { t ->
                 if (t != null) {
 
+                    if (gameData.isEmpty()) {
+                        gameDataJSON.name = t.name
+                        gameDataJSON.background_image = t.background_image
+                        gameDataJSON.id = t.id
+                        gameDataJSON.rating_top = t.rating_top
+                        gameDataJSON.rating = t.rating
+                        gameDataJSON.released = t.released
 
+                    }
 
-                    description.text=t.description_raw
-                    desc=t.description_raw
+                    description.text = t.description_raw
+                    desc = t.description_raw
 
 
                 }
             })
 
     }
+
+    private fun subscribeObservers(navIcon: Drawable) {
+
+        viewModel.observeSingle()!!.observe(this,
+            Observer<InfoGame?> { t ->
+                if (t != null) {
+
+                    gameDataJSON = Result(
+                        name = t.name,
+                        background_image = t.background_image,
+                        id = t.id,
+                        rating_top = t.rating_top,
+                        rating = t.rating,
+                        released = t.released,
+                        genres = t.genres,
+                        clip = t.clip
+
+                    )
+                    gameDataJSON.name = t.name
+                    gameDataJSON.background_image = t.background_image
+                    gameDataJSON.id = t.id
+                    gameDataJSON.rating_top = t.rating_top
+                    gameDataJSON.rating = t.rating
+                    gameDataJSON.released = t.released
+                    gameDataJSON.genres = t.genres
+
+
+                    description.text = t.description_raw
+                    desc = t.description_raw
+
+                    InitViewPreview(navIcon)
+                }
+            })
+
+    }
+
     private fun initViewPager() {
+        if (gameDataJSON.short_screenshots == null){
+            viewPager.visibility =View.GONE
+        }
         viewPager.apply {
             adapter = adapter1
             clipChildren = false
@@ -267,7 +368,8 @@ class PreviewGameActivity : BaseActivity() {
             }
             setPageTransformer(compositePageTransformer)
         }
-        adapter1.setPosts(gameDataJSON.short_screenshots)
+        if (gameDataJSON.short_screenshots != null)
+            adapter1.setPosts(gameDataJSON.short_screenshots!!)
     }
 
     private fun initRecyclerView() {
@@ -277,7 +379,8 @@ class PreviewGameActivity : BaseActivity() {
             false
         )
         gangerGame.adapter = adapter2
-        adapter2.setPosts(gameDataJSON.genres)
+
+        adapter2.setPosts(gameDataJSON.genres!!)
     }
 
     override fun onBackPressed() {

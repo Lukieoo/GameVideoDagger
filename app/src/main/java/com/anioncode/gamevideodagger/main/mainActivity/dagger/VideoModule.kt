@@ -81,8 +81,7 @@ abstract class VideoModule {
         @Provides
         @JvmStatic
         open fun provideRetrofitInstance(): Retrofit {
-            return Retrofit.Builder()
-//                .baseUrl("https://jsonplaceholder.typicode.com")
+            return Retrofit.Builder() 
                 .baseUrl("https://api.rawg.io")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
