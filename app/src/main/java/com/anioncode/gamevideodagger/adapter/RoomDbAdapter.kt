@@ -21,6 +21,7 @@ class RoomDbAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter
 
     interface  OnClickAdapterListner{
         fun onClick( game:Game)
+        fun onDelete( game:Game)
     }
     override fun getItemCount(): Int {
         if(::items.isInitialized){
@@ -47,7 +48,7 @@ class RoomDbAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter
 
     // Binds each item  in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var model=items.get(position)
+        var model= items[position]
         holder.title.text=model.title
         holder.desc.text=model.desc
 
@@ -57,8 +58,12 @@ class RoomDbAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter
             .centerCrop()
             .into( holder.photoGame)
 
-        holder.deleteThis.setOnClickListener {
+        holder.pushIntent.setOnClickListener {
             itemClick.onClick(model)
+        }
+
+        holder.deleteThis.setOnClickListener {
+            itemClick.onDelete(model)
             holder.swipeLayout.close(true)
         }
 
@@ -77,6 +82,7 @@ class RoomDbAdapter(var itemClick: OnClickAdapterListner) : RecyclerView.Adapter
         val photoGame   = view.photoGame
         val deleteThis   = view.deleteThis
         val swipeLayout   = view.swipeLayout
+        val pushIntent   = view.pushIntent
 
     }
 }

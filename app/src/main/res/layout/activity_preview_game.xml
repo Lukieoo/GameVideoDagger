@@ -95,6 +95,7 @@
                         android:layout_marginRight="20dp"
                         android:src="@drawable/ic_star"
                         android:tint="@color/colorcomponnent" />
+
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -304,8 +305,6 @@
                         android:padding="10dp"
                         android:background="@android:color/transparent"
                         android:layout_centerHorizontal="true"
-
-                        android:layout_marginBottom="20dp"
                         android:id="@+id/btnNovaCompra"
                         android:layout_width="wrap_content"
                         android:text="Save in my store "
@@ -325,7 +324,6 @@
                         android:background="@android:color/transparent"
                         android:layout_centerHorizontal="true"
 
-                        android:layout_marginBottom="20dp"
                         android:id="@+id/btnNovaCompraBuy"
                         android:layout_width="wrap_content"
                         android:text="I want buy "

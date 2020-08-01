@@ -19,7 +19,7 @@
             android:launchMode="singleTask"
             ></activity>
         <activity android:name=".main.mainActivity.MainActivity"
-
+            android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

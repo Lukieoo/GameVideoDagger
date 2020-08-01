@@ -68,8 +68,6 @@ abstract class FilterFragmentBuildersModule {
                         application.applicationContext,
                         PreviewGameActivity::class.java
                     ).apply {
-                        putExtra("GameListBackround", game.background_image)
-                        putExtra("GameListColor", game.dominant_color)
 
                         putExtra("GameData", Gson().toJson(game))
 

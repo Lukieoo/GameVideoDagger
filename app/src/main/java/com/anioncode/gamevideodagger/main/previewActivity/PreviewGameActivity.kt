@@ -82,6 +82,7 @@ class PreviewGameActivity : BaseActivity() {
 
         gson = Gson()
         gameDataJSON = gson?.fromJson(gameData, Result::class.java)
+
         initRecyclerView()
         initViewPager();
         toolbar.setNavigationOnClickListener {
@@ -148,7 +149,7 @@ class PreviewGameActivity : BaseActivity() {
         cardstates.setBackgroundResource(R.drawable.cornerdrawable);
 
 
-        setTitle("");
+        setTitle("")
 
         titleGameToolbar.isSelected = true;  // Set focus to the textview
         titleGameToolbar.text = gameDataJSON.name
@@ -235,17 +236,18 @@ class PreviewGameActivity : BaseActivity() {
     }
 
     private fun subscribeObservers() {
-        viewModel.observeSingle()!!.observe(this, object : Observer<InfoGame?> {
-            override fun onChanged(t: InfoGame?) {
+        viewModel.observeSingle()!!.observe(this,
+            Observer<InfoGame?> { t ->
                 if (t != null) {
+
+
 
                     description.text=t.description_raw
                     desc=t.description_raw
 
 
                 }
-            }
-        })
+            })
 
     }
     private fun initViewPager() {
@@ -269,14 +271,12 @@ class PreviewGameActivity : BaseActivity() {
     }
 
     private fun initRecyclerView() {
-        gangerGame.setLayoutManager(
-            LinearLayoutManager(
-                this@PreviewGameActivity,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
+        gangerGame.layoutManager = LinearLayoutManager(
+            this@PreviewGameActivity,
+            LinearLayoutManager.HORIZONTAL,
+            false
         )
-        gangerGame.setAdapter(adapter2)
+        gangerGame.adapter = adapter2
         adapter2.setPosts(gameDataJSON.genres)
     }
 

@@ -34,8 +34,23 @@ abstract class DatabaseFragmentBuildersModule {
         @JvmStatic
         open fun provideAdapter(application: Application,repository: WordRepository): RoomDbAdapter {
             return RoomDbAdapter(itemClick = object : RoomDbAdapter.OnClickAdapterListner {
-
                 override fun onClick(game: Game) {
+                    println("WasClick")
+//                    var intent = Intent(
+//                        application.applicationContext,
+//                        PreviewGameActivity::class.java
+//                    ).apply {
+////                        putExtra("GameListBackround", game.background_image)
+////                        putExtra("GameListColor", game.dominant_color)
+//
+//                        putExtra("GameData", Gson().toJson(game))
+//
+//                    }
+//                    intent.flags = FLAG_ACTIVITY_NEW_TASK
+//                    application.applicationContext.startActivity(intent)
+                }
+
+                override fun onDelete(game: Game) {
                     GlobalScope.launch {
                         repository.deleteID(game.id)
                     }

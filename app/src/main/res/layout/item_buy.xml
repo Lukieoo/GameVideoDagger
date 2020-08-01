@@ -31,6 +31,8 @@ android:id="@+id/swipe"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"/>
             <View
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:background="@color/textcolorWhite"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"/>
