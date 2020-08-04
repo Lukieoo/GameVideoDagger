@@ -2,6 +2,8 @@
 Dagger2 , RxJava , Retrofit2 ,Unit Test ,Mvvm example ,Courtunies
 Ui design , Room, 
 
+https://youtu.be/lYxbbfsEtdo
+
 Finished in 80% 
 
 Soon in  Google Play store
