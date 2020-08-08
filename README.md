@@ -3,6 +3,7 @@ Dagger2 , RxJava , Retrofit2 ,Unit Test ,Mvvm example ,Courtunies
 Ui design , Room, <br>
 https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger <br>
 https://youtu.be/lYxbbfsEtdo <br>
+http://anioncode.pl/2020/08/08/lukio-game-searcher-2/ <br>
 
 Finished in 80% 
 
