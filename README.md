@@ -1,5 +1,5 @@
 # GameVideoDagger
-Dagger2 , RxJava , Retrofit2 ,Unit Test ,Mvvm example ,Courtunies
+Dagger2 , RxJava ,Room Retrofit2 ,Unit Test ,Mvvm example ,Courtunies
 Ui design , Room, <br>
 https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger <br>
 https://youtu.be/lYxbbfsEtdo <br>
