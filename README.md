@@ -1,16 +1,39 @@
+ 
+
 # GameVideoDagger
-Dagger2 , RxJava ,Room Retrofit2 ,Unit Test ,Mvvm example ,Courtunies
-Ui design , Room, <br> <br>
-https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger <br>
-https://youtu.be/lYxbbfsEtdo <br>
-http://anioncode.pl/2020/08/08/lukio-game-searcher-2/ <br>
 
-Finished in 90% 
+>  <a href="https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger">Google Play<a/>
+ 
 
-Soon in  Google Play store
+>  <a href="https://youtu.be/lYxbbfsEtdo">Youtube<a/>
+  
 
+>  <a href="http://anioncode.pl/2020/08/08/lukio-game-searcher-2/">Web<a/>
+ 
+![Recordit GIF](https://media.giphy.com/media/W4XaKUshFWYGOI63Bj/giphy.gif)
+ 
+**Used**
 
-![Alt Text](https://media.giphy.com/media/W4XaKUshFWYGOI63Bj/giphy.gif)
-<p></p>
-Api from
-<p>https://rawg.io/</p>
+- Kotlin
+- MvvM
+- Room
+- Courtunies
+- RxJava
+- Dagger 2
+- Retrofit 2
+- <a href="https://rawg.io/">Rest Api</a>
+ 
+
+## FAQ
+
+- **How do I do *specifically* so and so?**
+    - No problem! Just do this.
+
+--- 
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2020 © <a href="https://github.com/Lukieoo" target="_blank">Lukieoo</a>.
