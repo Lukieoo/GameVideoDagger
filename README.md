@@ -17,7 +17,7 @@
 - Kotlin
 - MvvM
 - Room
-- Courtunies
+- Coroutines 
 - RxJava
 - Dagger 2
 - Retrofit 2
