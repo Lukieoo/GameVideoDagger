@@ -15,7 +15,7 @@
 **Used**
 
 - Kotlin
-- MvvM
+- Mvvm
 - Room
 - Coroutines kotlin
 - RxJava
