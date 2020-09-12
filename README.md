@@ -21,7 +21,7 @@
 - RxJava
 - Dagger 2
 - Retrofit 2
-- <a href="https://rawg.io/">Rest Api</a>
+- <a href="https://rawg.io/">Rest  Api</a>
  
 
 ## FAQ
