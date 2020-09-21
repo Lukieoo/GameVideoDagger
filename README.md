@@ -8,7 +8,7 @@
 >  <a href="https://youtu.be/lYxbbfsEtdo">Youtube<a/>
   
 
->  <a href="http://anioncode.pl/2020/08/08/lukio-game-searcher-2/">Web<a/>
+>  <a href="http://anioncode.pl/2020/08/08/lukio-game-searcher-2/">Web info<a/>
  
 ![Recordit GIF](https://media.giphy.com/media/W4XaKUshFWYGOI63Bj/giphy.gif)
  
