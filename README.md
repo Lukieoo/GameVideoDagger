@@ -1,6 +1,6 @@
  
 
-# GameVideoDagger
+# GameVideoDagge
 
 >  <a href="https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger">Google Play<a/>
  
