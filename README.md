@@ -1,6 +1,6 @@
  
 
-# GameVideoDagge
+# Lukioo Game searcher
 
 >  <a href="https://play.google.com/store/apps/details?id=com.anioncode.gamevideodagger">Google Play<a/>
  
